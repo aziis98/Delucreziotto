@@ -2,10 +2,18 @@
   "name": "delucreziotto",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aziis98/Delucreziotto.git"
+  },
   "author": "antonio.delucreziis@gmail.com",
-  "license": "ISC"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aziis98/Delucreziotto/issues"
+  },
+  "homepage": "https://github.com/aziis98/Delucreziotto#readme"
 }
