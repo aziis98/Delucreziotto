@@ -1,0 +1,11 @@
+{
+  "name": "delucreziotto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "antonio.delucreziis@gmail.com",
+  "license": "ISC"
+}
