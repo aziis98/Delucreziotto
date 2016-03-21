@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aziis98/Delucreziotto/issues"
   },
-  "homepage": "https://github.com/aziis98/Delucreziotto#readme"
+  "homepage": "https://github.com/aziis98/Delucreziotto#readme",
+  "dependencies": {
+    "express": "^4.13.4"
+  }
 }
