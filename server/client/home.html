@@ -1,13 +1,33 @@
-<html>
+<html ng-app="homeApp">
   <head>
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href="/public/stylesheets/core.css">
   </head>
-  <body ng-app="homeApp">
-    <h1>Prova</h1>
-    <p>1, 2, 3, non so cosa scrivere, quindi scriverò finché non avrò più idee, fine.</p>
+  <body ng-controller="homeController">
+    <header>
+      <div class="logo">
+        Delucreziotto
+        <div class="subtitle">
+          <a href="#">Vai a progetto e<sup>i&pi;</sup></a>
+        </div>
+      </div>
+    </header>
+    
+    <div class="panel">
+      <div class="title">
+        Assisti
+      </div>
+      <div class="content">
+        <p>Inserisci la chiave della partita alla quale vuoi assistere.</p>
+        
+        <label for="txt1m">Key:</label>
+        <input id="txt1m" type="text" ng-model="home.matchKey" placeholder="Chiave...">
+        
+        
+      </div>
+    </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="/public/scripts/home.js"></script>
