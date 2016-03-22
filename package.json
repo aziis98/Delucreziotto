@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server/server.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/aziis98/Delucreziotto#readme",
   "dependencies": {
+    "angular": "^1.5.2",
     "express": "^4.13.4"
   }
 }
