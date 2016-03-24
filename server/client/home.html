@@ -24,10 +24,12 @@
         
         <div>
           <label for="txt1m">Chiave</label>
-          <input id="txt1m" type="text" ng-model="home.matchKey">
+          <input id="txt1m" type="text" ng-model="home.matchKey" spellcheck="false">
         </div>
         
-        <button>Assisti</button>
+        <div class="button">
+          Assisti
+        </div>
         
       </div>
     </div>
@@ -39,9 +41,20 @@
       <div class="content">
         <p>Inserisci la chiave della partita alla quale vuoi partecipare.</p>
         
-        <div>
-          <label for="txt2m">Chiave</label>
-          <input id="txt2m" type="text" ng-model="home.matchKey">
+        <div class="inputSet">
+          <div class="inputPair">
+            <label for="txt2m">Chiave</label>
+            <input id="txt2m" type="text" ng-model="home.matchKey" spellcheck="false">
+          </div>
+          
+          <div class="inputPair">
+            <label for="txt3m">Nome Squadra</label>
+            <input id="txt3m" type="text" ng-model="home.teamName" spellcheck="false">
+          </div>
+        </div>
+        
+        <div class="button">
+          Partecipa
         </div>
         
       </div>

@@ -1,10 +1,10 @@
 
 // Variables
 $body-background: #FFE0AA
-$panel-border: #FF9B29
+$panel-border: #FF8800
 $panel-background: #FFCC7A
 $panel-title: #FFA53D
-
+$def-margin: 15px
 
 html,
 body
@@ -68,7 +68,6 @@ header
   margin: 30px 0px
   width: 80%
   max-width: 750px
-  min-height: 250px
   background: $panel-background
   border: 1px solid $panel-border
   border-radius: 4px
@@ -84,21 +83,27 @@ header
     border-top-right-radius: 4px
   .content
     display: flex
-    position: absolute
-    top: 60px
-    bottom: 0px
-    left: 0px
-    right: 0px
     align-items: center
     flex-direction: column
     
     bottom: 0px
     
-    div
+    .inputSet
+      display: flex
+      flex-direction: column
+      align-items: flex-end
+      
+    .inputPair
+      margin: $def-margin
       label
         display: inline-block
         margin-right: 8px
         text-align: left
+    
+    transition: height 1s linear
+    &.collapsed
+      height: 0
+      display: none
 
 
 
@@ -106,6 +111,8 @@ header
 
 
 
+p
+  margin: $def-margin 0px
 
 // Input Control Styling
 
@@ -119,7 +126,7 @@ input[type=text]
   color: black
   
   height: 30px
-  padding: 0px 7px
+  padding: 0px 10px
   border-radius: 2px
 
   transition: border 0.25s linear, background 0.1s linear
@@ -131,7 +138,11 @@ input[type=text]
 ::-webkit-input-placeholder
   color: $panel-border
 
-button
+
+
+
+.button
+  display: inline-block
   outline: none
   border: 1px solid $panel-border
   background: #FFD48E
@@ -141,5 +152,21 @@ button
     size: 15px
   
   height: 30px
-  padding: 0px 7px
+  margin: $def-margin 0
+  padding: 0px 15px
+  padding-top: 3px
   border-radius: 2px
+  box-sizing: border-box
+  -webkit-user-select: none
+  
+  &:hover
+    border: 1px solid #FF8900
+    background: #FFDCA5
+    cursor: pointer
+    
+    &:active
+      background: #FFA53D
+      
+      
+      
+      
