@@ -6,8 +6,8 @@ angular.module('homeApp', []).controller('homeController', function ($scope) {
     $scope.answers = [ '' ];
     $scope.matchDerive = 1;
     var rDate = new Date();
-    rDate.setSeconds(0);
-    rDate.setMilliseconds(0);
+    rDate.seconds(0);
+    rDate.millis(0);
     $scope.matchStartDatetime = rDate;
     $scope.matchDuration = 120;
     
@@ -21,14 +21,3 @@ angular.module('homeApp', []).controller('homeController', function ($scope) {
       }
     }
 });
-
-function getParams() {
-  var params = {};
-  var query = document.location.search.substring(1); // removes the pending '?'
-  var pairs = query.split('&');
-  pairs.forEach(function (pair) {
-    pair = pair.split('=');
-    params[pair[0]] = pair[1];
-  });
-  return params;
-}

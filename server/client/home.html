@@ -14,7 +14,16 @@
         </div>
       </div>
     </header>
-    
+        
+    <div class="panel">
+      <div class="title">
+        Gare in corso
+      </div>
+      <div class="content">
+        <p>Lista di cose</p>
+      </div>
+    </div>
+      
     <!-- Assisti -->
     <div class="panel">
       <div class="title">
@@ -95,16 +104,16 @@
           <span class="spacer"></span>
 
           <div class="inputPair">
-            <label>Ora di inizio</label>
+            <label>Deriva</label>
+            <input type="number" ng-model="matchDerive" min="0">
+          </div>
+          <div class="inputPair">
+            <label>Data e ora di inizio</label>
             <input type="datetime-local" ng-model="matchStartDatetime">
           </div>
           <div class="inputPair">
             <label>Durata in minuti</label>
             <input type="number" ng-model="matchDuration">
-          </div>
-          <div class="inputPair">
-            <label>Deriva</label>
-            <input type="number" ng-model="matchDerive" min="0">
           </div>
         </div>
         
@@ -117,6 +126,7 @@
       Antonio De Lucreziis &copy;
     </footer>
     
+    <script src="/public/scripts/util.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="/public/scripts/home.js"></script>
   </body>
