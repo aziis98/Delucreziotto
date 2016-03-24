@@ -1,4 +1,4 @@
-var logicCore = require('./logic/logic.js');
+var logic = require('./logic/logic.js');
 
 var express = require('express');
 var app = express();
@@ -15,5 +15,5 @@ app.listen(app.get('port'), function() {
 });
 
 setInterval(function() {
-  
+  logic.update();
 }, 1000);
