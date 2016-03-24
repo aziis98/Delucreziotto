@@ -66,6 +66,28 @@ header .logo .subtitle a:hover {
   color: #3333ff;
 }
 
+footer {
+  width: 100%;
+  height: 50px;
+  margin-top: 50px;
+  border-top: 1px solid #FF8800;
+  background: #FFA53D;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 10px 40px;
+  box-sizing: border-box;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
 .panel {
   position: relative;
   margin: 30px 0px;
@@ -98,7 +120,7 @@ header .logo .subtitle a:hover {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  bottom: 0px;
+  padding: 15px 0px;
   transition: height 1s linear;
 }
 
@@ -115,7 +137,7 @@ header .logo .subtitle a:hover {
 }
 
 .panel .content .inputPair {
-  margin: 15px;
+  margin: 2.5px;
 }
 
 .panel .content .inputPair label {
@@ -130,23 +152,25 @@ header .logo .subtitle a:hover {
 }
 
 p {
-  margin: 15px 0px;
+  margin: 5px 0px;
 }
 
-input[type=text] {
+input {
   outline: none;
   border: 1px solid #FF8800;
   background: #FFD48E;
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
   color: black;
+  text-align: center;
+  width: 300px;
   height: 30px;
   padding: 0px 10px;
   border-radius: 2px;
   transition: border 0.25s linear, background 0.1s linear;
 }
 
-input[type=text]:focus {
+input:focus {
   border: 1px solid #FF8900;
   background: #FFDCA5;
 }
@@ -163,7 +187,7 @@ input[type=text]:focus {
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
   height: 30px;
-  margin: 15px 0;
+  margin: 5px 5px;
   padding: 0px 15px;
   padding-top: 3px;
   border-radius: 2px;
@@ -179,4 +203,18 @@ input[type=text]:focus {
 
 .button:hover:active {
   background: #FFA53D;
+}
+
+#boxDelAdd {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  width: 100%;
+}
+
+span.spacer {
+  height: 15px;
 }

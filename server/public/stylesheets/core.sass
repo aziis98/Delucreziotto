@@ -4,7 +4,7 @@ $body-background: #FFE0AA
 $panel-border: #FF8800
 $panel-background: #FFCC7A
 $panel-title: #FFA53D
-$def-margin: 15px
+$def-margin: 5px
 
 html,
 body
@@ -53,8 +53,19 @@ header
         &:hover
           color: lighten(blue, 10%)
 
-
-
+footer
+  width: 100%
+  height: 50px
+  margin-top: 50px
+  
+  border-top: 1px solid $panel-border
+  background: $panel-title
+  display: flex
+  flex-direction: column
+  padding: 10px 40px
+  box-sizing: border-box
+  justify-content: center
+  align-items: flex-end
 
 
 
@@ -85,16 +96,15 @@ header
     display: flex
     align-items: center
     flex-direction: column
-    
-    bottom: 0px
-    
+    padding: 15px 0px
+        
     .inputSet
       display: flex
       flex-direction: column
       align-items: flex-end
       
     .inputPair
-      margin: $def-margin
+      margin: $def-margin / 2
       label
         display: inline-block
         margin-right: 8px
@@ -116,7 +126,7 @@ p
 
 // Input Control Styling
 
-input[type=text]
+input
   outline: none
   border: 1px solid $panel-border
   background: #FFD48E
@@ -124,7 +134,8 @@ input[type=text]
     family: 'Roboto', sans-serif
     size: 15px
   color: black
-  
+  text-align: center
+  width: 300px
   height: 30px
   padding: 0px 10px
   border-radius: 2px
@@ -152,7 +163,7 @@ input[type=text]
     size: 15px
   
   height: 30px
-  margin: $def-margin 0
+  margin: $def-margin 5px
   padding: 0px 15px
   padding-top: 3px
   border-radius: 2px
@@ -167,6 +178,10 @@ input[type=text]
     &:active
       background: #FFA53D
       
+#boxDelAdd
+  display: flex
+  justify-content: flex-end
+  width: 100%
       
-      
-      
+span.spacer
+  height: 15px

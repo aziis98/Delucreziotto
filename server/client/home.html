@@ -15,6 +15,7 @@
       </div>
     </header>
     
+    <!-- Assisti -->
     <div class="panel">
       <div class="title">
         Assisti
@@ -34,6 +35,7 @@
       </div>
     </div>
     
+    <!-- Partecipa -->
     <div class="panel">
       <div class="title">
         Partecipa
@@ -44,12 +46,12 @@
         <div class="inputSet">
           <div class="inputPair">
             <label for="txt2m">Chiave</label>
-            <input id="txt2m" type="text" ng-model="home.matchKey" spellcheck="false">
+            <input id="txt2m" type="text" ng-model="matchKey" spellcheck="false">
           </div>
           
           <div class="inputPair">
             <label for="txt3m">Nome Squadra</label>
-            <input id="txt3m" type="text" ng-model="home.teamName" spellcheck="false">
+            <input id="txt3m" type="text" ng-model="teamName" spellcheck="false">
           </div>
         </div>
         
@@ -59,6 +61,61 @@
         
       </div>
     </div>
+    
+    <!-- Crea Gara -->
+    <div class="panel">
+      <div class="title">
+        Crea Gara
+      </div>
+      <div class="content">
+        <p>Inserisci i vari parametri per creare una nuova gara.</p>
+      
+        <div class="inputSet">
+          <div class="inputPair">
+            <label>Nome Gara</label>
+            <input type="text" ng-model="matchName">
+          </div>
+          
+          <span class="spacer"></span>
+          
+          <div class="inputPair" ng-repeat="answer in answers track by $index">
+            <label>Risposta {{$index + 1}}</label>
+            <input type="text" ng-model="answers[$index]">
+          </div>
+          
+          <div id="boxDelAdd">
+            <div class="button" ng-click="delAnswer()">
+              Elimina Risposta
+            </div>
+            <div class="button" ng-click="newAnswer()">
+              Nuova Risposta
+            </div>
+          </div>
+          
+          <span class="spacer"></span>
+
+          <div class="inputPair">
+            <label>Ora di inizio</label>
+            <input type="datetime-local" ng-model="matchStartDatetime">
+          </div>
+          <div class="inputPair">
+            <label>Durata in minuti</label>
+            <input type="number" ng-model="matchDuration">
+          </div>
+          <div class="inputPair">
+            <label>Deriva</label>
+            <input type="number" ng-model="matchDerive" min="0">
+          </div>
+        </div>
+        
+        <div class="button">Crea Gara</div>
+        
+      </div>
+    </div>
+    
+    <footer>
+      Antonio De Lucreziis &copy;
+    </footer>
     
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="/public/scripts/home.js"></script>
