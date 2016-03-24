@@ -1,0 +1,35 @@
+$list-border: #FF8800
+
+.list
+  border: 1px solid $list-border
+  border-radius: 4px
+  
+  height: 350px
+  width: 300px
+  overflow: auto
+  .item
+    padding: 5px
+    border-bottom: 1px solid $list-border
+    .name
+      font-size: 20px
+      &:hover
+        color: blue
+        cursor: pointer
+    .sub
+      font-size: 15px
+    &:last-child
+      border-bottom: none
+      
+
+::-webkit-scrollbar
+  width: 6px
+
+
+::-webkit-scrollbar-track
+  background: transparent
+  border-radius: 4px
+  width: 5px
+ 
+::-webkit-scrollbar-thumb
+  border-radius: 4px
+  background: lighten($list-border, 20%)

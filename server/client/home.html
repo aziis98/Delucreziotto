@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/public/stylesheets/core.css">
   </head>
   <body ng-controller="homeController">
+    
     <header>
       <div class="logo">
         Delucreziotto
@@ -14,15 +15,6 @@
         </div>
       </div>
     </header>
-        
-    <div class="panel">
-      <div class="title">
-        Gare in corso
-      </div>
-      <div class="content">
-        <p>Lista di cose</p>
-      </div>
-    </div>
       
     <!-- Assisti -->
     <div class="panel">
@@ -34,13 +26,32 @@
         
         <div>
           <label for="txt1m">Chiave</label>
-          <input id="txt1m" type="text" ng-model="home.matchKey" spellcheck="false">
+          <input id="txt1m" type="text" ng-model="matchKey" spellcheck="false">
         </div>
         
         <div class="button">
           Assisti
         </div>
         
+      </div>
+    </div>
+    
+    <!-- Lista Gare -->
+    <div class="panel">
+      <div class="title">
+        Gare registrate
+      </div>
+      <div class="content">
+        <p>Lista delle gare registrate sul server, clicca sul nome della gara per selezionarla.</p>
+        <span class="spacer"></span>
+        <div class="list">
+          <div class="item" ng-repeat="match in onlineMatches">
+            <div class="name" ng-click="setMatchKey(match.key)">{{match.name}}</div>
+            <div class="sub">Chiave: {{match.key}}</div>
+            <div class="sub">Stato: {{match.status}}</div>
+            <div class="sub">Inizio: {{formatDate(match.start)}}</div>
+          </div>
+        </div>
       </div>
     </div>
     

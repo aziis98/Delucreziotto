@@ -27,3 +27,15 @@ Date.prototype.minutes = function (newMinutes) {
 Date.prototype.hours = function (newHours) {
   return arguments.length == 0 ? this.getHours() : (this.setHours(newHours));
 };
+
+Date.prototype.day = function (newDay) {
+  return arguments.length == 0 ? this.getDay() : (this.setDate(newDay));
+};
+
+Date.prototype.month = function (newMonth) {
+  return arguments.length == 0 ? this.getMonth() : (this.setMonth(newMonth));
+};
+
+Date.prototype.year = function (newYear) {
+  return arguments.length == 0 ? this.getFullYear() : (this.setFullYear(newYear));
+};

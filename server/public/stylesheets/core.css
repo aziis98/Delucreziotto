@@ -155,7 +155,7 @@ footer {
 }
 
 p {
-  margin: 5px 0px;
+  margin: 5px 50px;
 }
 
 input {
@@ -220,4 +220,49 @@ input:focus {
 
 span.spacer {
   height: 15px;
+}
+
+.list {
+  border: 1px solid #FF8800;
+  border-radius: 4px;
+  height: 350px;
+  width: 300px;
+  overflow: auto;
+}
+
+.list .item {
+  padding: 5px;
+  border-bottom: 1px solid #FF8800;
+}
+
+.list .item .name {
+  font-size: 20px;
+}
+
+.list .item .name:hover {
+  color: blue;
+  cursor: pointer;
+}
+
+.list .item .sub {
+  font-size: 15px;
+}
+
+.list .item:last-child {
+  border-bottom: none;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 4px;
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background: #ffb866;
 }
