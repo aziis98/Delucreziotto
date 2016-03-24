@@ -1,0 +1,144 @@
+<html ng-app="homeApp">
+  <head>
+    <!-- Roboto Font Link -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="/public/stylesheets/core.css">
+  </head>
+  <body ng-controller="homeController">
+    
+    <header>
+      <div class="logo">
+        Delucreziotto
+        <div class="subtitle">
+          <a href="#">Vai a progetto e<sup>i&pi;</sup></a>
+        </div>
+      </div>
+    </header>
+      
+    <!-- Assisti -->
+    <div class="panel">
+      <div class="title">
+        Assisti
+      </div>
+      <div class="content">
+        <p>Inserisci la chiave della partita alla quale vuoi assistere.</p>
+        
+        <div>
+          <label for="txt1m">Chiave</label>
+          <input id="txt1m" type="text" ng-model="matchKey" spellcheck="false">
+        </div>
+        
+        <div class="button">
+          Assisti
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Lista Gare -->
+    <div class="panel">
+      <div class="title">
+        Gare registrate
+      </div>
+      <div class="content">
+        <p>Lista delle gare registrate sul server, clicca sul nome della gara per selezionarla.</p>
+        <span class="spacer"></span>
+        <div class="list">
+          <div class="item" ng-repeat="match in onlineMatches">
+            <div class="name" ng-click="setMatchKey(match.key)">{{match.name}}</div>
+            <div class="sub">Chiave: {{match.key}}</div>
+            <div class="sub">Stato: {{match.status}}</div>
+            <div class="sub">Inizio: {{formatDate(match.start)}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Partecipa -->
+    <div class="panel">
+      <div class="title">
+        Partecipa
+      </div>
+      <div class="content">
+        <p>Inserisci la chiave della partita alla quale vuoi partecipare.</p>
+        
+        <div class="inputSet">
+          <div class="inputPair">
+            <label for="txt2m">Chiave</label>
+            <input id="txt2m" type="text" ng-model="matchKey" spellcheck="false">
+          </div>
+          
+          <div class="inputPair">
+            <label for="txt3m">Nome Squadra</label>
+            <input id="txt3m" type="text" ng-model="teamName" spellcheck="false">
+          </div>
+        </div>
+        
+        <div class="button">
+          Partecipa
+        </div>
+        
+      </div>
+    </div>
+    
+    <!-- Crea Gara -->
+    <div class="panel">
+      <div class="title">
+        Crea Gara
+      </div>
+      <div class="content">
+        <p>Inserisci i vari parametri per creare una nuova gara.</p>
+      
+        <div class="inputSet">
+          <div class="inputPair">
+            <label>Nome Gara</label>
+            <input type="text" ng-model="matchName">
+          </div>
+          
+          <span class="spacer"></span>
+          
+          <div class="inputPair" ng-repeat="answer in answers track by $index">
+            <label>Risposta {{$index + 1}}</label>
+            <input type="text" ng-model="answers[$index]">
+          </div>
+          
+          <div id="boxDelAdd">
+            <div class="button" ng-click="delAnswer()">
+              Elimina Risposta
+            </div>
+            <div class="button" ng-click="newAnswer()">
+              Nuova Risposta
+            </div>
+          </div>
+          
+          <span class="spacer"></span>
+
+          <div class="inputPair">
+            <label>Deriva</label>
+            <input type="number" ng-model="matchDerive" min="0">
+          </div>
+          <div class="inputPair">
+            <label>Data e ora di inizio</label>
+            <input type="datetime-local" ng-model="matchStartDatetime">
+          </div>
+          <div class="inputPair">
+            <label>Durata in minuti</label>
+            <input type="number" ng-model="matchDuration">
+          </div>
+        </div>
+        
+        <div class="button">Crea Gara</div>
+        
+      </div>
+    </div>
+    
+    <footer>
+      Antonio De Lucreziis &copy;
+    </footer>
+    
+    <script src="/public/scripts/util.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="/public/scripts/home.js"></script>
+  </body>
+</html>

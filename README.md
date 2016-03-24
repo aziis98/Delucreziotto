@@ -3,7 +3,7 @@ Creato in sostituzione al sito 'campigotto' per giocare le gare a squadre online
 
 Ideal domain: https://www.delucreziotto.com
 
-## Tecnologies Used
+## Technologies Used
 In teoria l'app dovrebbe sfruttare la struttura MVC (Model View Controller) su cui Angular.js si basa.
 
 *Server*:
@@ -17,13 +17,21 @@ In teoria l'app dovrebbe sfruttare la struttura MVC (Model View Controller) su c
 ## Structure
 ### Routers
 
+La struttura generale sarà la seguente:
+
+| Path | Description |
+| ---  | --- |
+| /    | all the static pages |
+| /api | all the api code that returns **JSON** data |
+| /app | all the webapp code will be go in this route * |
+
 | Method | Path  | Action |
 | ---    | ---   | ---    |
 |  GET  | / | get the homepage (corrispondente alla pagina di "Progetto Phi^2") |
-|  GET  | /app | get the whole app |
-|  GET  | /app/:match | get match json data (*only safe data*) |
-|  GET  | /app/:match/:key | get team specific json data (*only safe data*) |
-|  POST  | /app/action | post an action to the server * |
+|  GET  | /api | get the whole app |
+|  GET  | /api/:match | get match json data (*only safe data*) |
+|  GET  | /api/:match/:key | get team specific json data (*only safe data*) |
+|  POST  | /api/action | post an action to the server * |
 
 \* = Vedi paragrafo sotto
 
@@ -32,7 +40,7 @@ Qui è spiegato come è strutturata una richiesta di azione al server.
 
 ```javascript
 var request = {
-  type: ''
+  type: '???'
 }
 ```
 
@@ -70,3 +78,13 @@ var am = a.minutes(); // Gets the minutes of the Date -- Getter polyfill
 ```
 
 \* = is polyfill the right term?
+
+## Webapp
+
+| Path     | Description |
+| ---      | --- |
+| /app | renders the main app page (dove si possono creare nuove partite, decidere se assistere ad una partita già in corso oppure partecipare ad una partita come squadra. Sarà anche presente una lista con le partite recenti e future) |
+| /app/:match | used for the direct link to the match (for spectators). Here every one can watch a match |
+| /app/:match/:team | direct link to the team setting page, here the team can choose the "Jolly" and answer questions |
+
+Userò AngularJS solo lato client e nessun 'template engine' lato server
