@@ -1,4 +1,10 @@
 
+function getUrlRoutesData() {
+  return window.location.pathname.split('/').filter(function (str) {
+    return str.length > 0;
+  });
+}
+
 function getParams() {
   var params = {};
   var query = document.location.search.substring(1); // removes the pending '?'

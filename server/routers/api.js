@@ -30,7 +30,8 @@ module.exports = function (express, __root) {
     logic.getMatch(info.match).addTeam(team);
     
     res.json({
-      key: team.key
+      key: team.key,
+      matchKey: info.match
     });
   })
   

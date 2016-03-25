@@ -13,11 +13,11 @@ module.exports = function (express, __root) {
   })
   
   router.get('/:match', function (req, res) {
-    res.sendFile(__root + '/client/app.html');
+    res.sendFile(__root + '/client/gridview.html');
   })
   
   router.get('/:match/:team', function (req, res) {
-    res.sendFile(__root + '/client/app.html');
+    res.sendFile(__root + '/client/gridview.html');
   })
   
   return router;

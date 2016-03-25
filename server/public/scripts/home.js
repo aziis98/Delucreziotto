@@ -27,6 +27,17 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     
     $scope.testMatchKey();
     
+    $scope.createTeam = function () {
+      var teamInfo = {
+        name: $scope.teamName.trim(),
+        match: $scope.matchKey
+      };
+      
+      $http.post('/api/newteam', teamInfo).then(function (res) {
+        window.location.href = "/app/" + res.data.matchKey + "/" + res.data.key;
+      });
+    }
+    
     $scope.createMatch = function () {
       var matchInfo = {
         name: $scope.matchName,
@@ -42,12 +53,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
         $scope.matchinfo = res.data;
       });
     }
-    
-    $scope.matchinfo = {
-      key: 'hf29hf9h93dh2',
-      adminKey: 'jrf82h39dnidd'
-    }
-    
+        
     $scope.setMatchKey = function (key) {
       $scope.matchKey = key;
     }

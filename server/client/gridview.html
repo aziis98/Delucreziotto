@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="gridViewApp">
+  <head>
+    <!-- Roboto Font Link -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="/public/stylesheets/gridview.css">
+  </head>
+  <body ng-controller="gridViewController">
+    
+    <header>
+      <h1>{{match.name}}</h1>
+      <h2 ng-show="viewType == 'team'">{{team.name}}</h2>
+    </header>
+    
+    <div class="gridpanel">
+      <div class="grid">
+        <div class="row">
+          <div class="head">Domanda/Squadra</div>
+          <div class="head question" ng-repeat="answer in match.answers track by $index">
+            {{$index}}
+          </div>
+        </div>
+        <div class="row" ng-repeat="team in match.teams">
+          <div class="cell">{{team.name}}</div>
+        </div>
+      </div>
+    </div>
+    
+    <script src="/public/scripts/util.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="/public/scripts/gridview.js" charset="utf-8"></script>
+  </body>
+</html>
