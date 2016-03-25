@@ -3,23 +3,25 @@
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     
-    <link rel="stylesheet" href="/public/stylesheets/core.css">
+    <link rel="stylesheet" href="/public/stylesheets/controlpanel.css">
   </head>
   <body ng-controller="ctrlAdminPanel">
     
-    <div class="large-panel">
-      <div class="title">
-        Lista Azioni relativa alla gara: {{matchInfo.matchKey}} , la chiave privata: {{matchInfo.matchPass}}
+    <header>
+      <h1>Pannello di controllo</h1>
+      <p>
+        Nome gara: <b>{{match.name}}</b> ({{match.key}})
+      </p>
+      <div ng-show="authenticationError">
+        Errore di Autenticazione
       </div>
-      <div class="content">
-        <div class="action-list">
-          <div class="item">
-            
-          </div>
-        </div>
+    </header>
+    
+    <div class="actionlist">
+      <div class="action" ng-repeat="(key, action) in match.actions">
+        <pre>{{formatJSON(action)}}</pre>
       </div>
     </div>
-    
     
     <script src="/public/scripts/util.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>

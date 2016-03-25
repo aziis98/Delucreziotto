@@ -23,6 +23,17 @@ module.exports = function (express, __root) {
     });
   })
   
+  router.post('/newteam', function (req, res) {
+    var info = req.body;
+    var team = new Team(info.name);
+    
+    logic.getMatch(info.match).addTeam(team);
+    
+    res.json({
+      key: team.key
+    });
+  })
+  
   // Match action, see logic.js for the expected syntax
   router.post('/action', function (req, res) {
     var info = req.body;

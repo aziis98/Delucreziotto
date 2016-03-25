@@ -2,12 +2,12 @@
 
 var keygen = require('./keygen.js');
 
-Match = function(name, answers, startTime, options) {
+Match = function(name, answers, start, options) {
   this.key = keygen.generate(10);
   this.adminKey = keygen.generate(10);
   
   this.name = name;
-  this.startTime = startTime;
+  this.start = start;
   this.answers = answers;
   
   this.teams = {};

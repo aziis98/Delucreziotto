@@ -1,3 +1,5 @@
+require('./public/scripts/util.js');
+
 var logic = require('./logic/logic.js');
 
 var express = require('express');

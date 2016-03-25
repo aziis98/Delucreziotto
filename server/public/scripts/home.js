@@ -19,6 +19,14 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
       })
     });
     
+    $scope.testMatchKey = function () {
+      $http.get('/api/has/' + $scope.matchKey).then(function (res) {
+        $scope.matchKeyValidator = res.data;
+      })
+    }
+    
+    $scope.testMatchKey();
+    
     $scope.createMatch = function () {
       var matchInfo = {
         name: $scope.matchName,
@@ -33,6 +41,11 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
       $http.post('/api/newmatch', matchInfo).then(function (res) {
         $scope.matchinfo = res.data;
       });
+    }
+    
+    $scope.matchinfo = {
+      key: 'hf29hf9h93dh2',
+      adminKey: 'jrf82h39dnidd'
     }
     
     $scope.setMatchKey = function (key) {
@@ -50,6 +63,16 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     }
     
     $scope.formatDate = function(date) {
-      return date.day() + '/' + date.month() + '/' + date.year() + ' ' + date.hours() + ':' + date.minutes();
+      var d = new Date(date);
+      return format2Digit(d.day()) + '/' + format2Digit(d.month()) + '/' + d.year() + ' ' + format2Digit(d.hours()) + ':' + format2Digit(d.minutes());
+    }
+    
+    function format2Digit(number) {
+      if (number < 10) {
+        return '0' + number;
+      }
+      else {
+        return number;
+      }
     }
 });

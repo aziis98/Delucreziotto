@@ -29,8 +29,17 @@
       
     .inputPair
       margin: $def-margin / 2
+      position: relative
       label
         display: inline-block
         margin-right: 8px
         text-align: left
+      .validator
+        position: absolute
+        top: 4px
+        right: -50px
+        &-true
+          color: green
+        &-false
+          color: red
     
