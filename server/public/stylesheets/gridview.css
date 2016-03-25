@@ -295,3 +295,17 @@ header {
 .gridpanel .grid .row .head.question {
   text-align: center;
 }
+
+.gridpanel .grid .row .cell {
+  flex: 1;
+}
+
+.gridpanel .grid .row .cell.answer {
+  text-align: center;
+}
+
+.gridpanel .grid .row .cell.jolly::after {
+  content: 'J';
+  color: green;
+  font-weight: bold;
+}

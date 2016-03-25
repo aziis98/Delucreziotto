@@ -23,6 +23,9 @@
         </div>
         <div class="row" ng-repeat="team in match.teams">
           <div class="cell">{{team.name}}</div>
+          <div class="cell answer" ng-repeat="answer in [0,0,0,0,0,0] track by $index">
+            {{answer}}
+          </div>
         </div>
       </div>
     </div>
