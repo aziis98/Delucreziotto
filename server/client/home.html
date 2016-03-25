@@ -128,7 +128,12 @@
           </div>
         </div>
         
-        <div class="button">Crea Gara</div>
+        <div class="button" ng-click="createMatch()">Crea Gara</div>
+        
+        <div class="newmatch" ng-disabled="matchinfo == undefined">
+          <p>La chiave della partita è: {{matchinfo.key}}</p>
+          <p>La password per accedere al pannello di controllo della gara è: {{matchinfo.adminKey}}</p>
+        </div>
         
       </div>
     </div>
@@ -138,6 +143,7 @@
     </footer>
     
     <script src="/public/scripts/util.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="/public/scripts/home.js"></script>
   </body>

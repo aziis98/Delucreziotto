@@ -13,7 +13,3 @@ app.use( '/api'    , require('./routers/api.js')(express, __dirname) );
 app.listen(app.get('port'), function() {
     console.log('Node app is running on port', app.get('port'));
 });
-
-setInterval(function() {
-  logic.update();
-}, 1000);

@@ -1,7 +1,10 @@
+// Copyright 2016 Antonio De Lucreziis
+
 var keygen = require('./keygen.js');
 
 Match = function(name, answers, startTime, options) {
   this.key = keygen.generate(10);
+  this.adminKey = keygen.generate(10);
   
   this.name = name;
   this.startTime = startTime;

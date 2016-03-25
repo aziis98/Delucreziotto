@@ -1,5 +1,4 @@
 
-
 function getParams() {
   var params = {};
   var query = document.location.search.substring(1); // removes the pending '?'

@@ -1,4 +1,4 @@
-angular.module('homeApp', []).controller('homeController', function ($scope) {
+angular.module('homeApp', []).controller('homeController', function ($scope, $http) {
     var params = getParams();
     
     $scope.matchKey = params['match'] || '';
@@ -11,44 +11,29 @@ angular.module('homeApp', []).controller('homeController', function ($scope) {
     $scope.matchStartDatetime = rDate;
     $scope.matchDuration = 120;
     
-    $scope.onlineMatches = [
-      {
-        name: "Gara di allenamento",
-        key: "32r08u0j2",
-        status: 'ended',
-        start: new Date()
-      },
-      {
-        name: "Semifinale di Cesenatico",
-        key: "f4j0jf2n2",
-        status: 'started',
-        start: new Date()
-      },
-      {
-        name: 'Finale di Cesenatico',
-        key: 'jh8fh4320',
-        status: 'not started',
-        start: new Date()
-      },
-      {
-        name: "Gara di allenamento",
-        key: "32r08u0j2",
-        status: 'ended',
-        start: new Date()
-      },
-      {
-        name: "Semifinale di Cesenatico",
-        key: "f4j0jf2n2",
-        status: 'started',
-        start: new Date()
-      },
-      {
-        name: 'Finale di Cesenatico',
-        key: 'jh8fh4320',
-        status: 'not started',
-        start: new Date()
-      }
-    ];
+    $scope.onlineMatches = [];
+    
+    $http.get('/api/list').then(function (res) {
+      _.each(res.data, function (match) {
+        $scope.onlineMatches.push(match);
+      })
+    });
+    
+    $scope.createMatch = function () {
+      var matchInfo = {
+        name: $scope.matchName,
+        answers: $scope.answers,
+        startTime: $scope.matchStartDatetime,
+        options: {
+          derive: $scope.matchDerive,
+          duration: $scope.matchDuration
+        }
+      };
+      
+      $http.post('/api/newmatch', matchInfo).then(function (res) {
+        $scope.matchinfo = res.data;
+      });
+    }
     
     $scope.setMatchKey = function (key) {
       $scope.matchKey = key;
