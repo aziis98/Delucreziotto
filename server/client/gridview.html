@@ -33,6 +33,14 @@
       </table>
     </div>
     
+    <div>
+      Inserisci risposta:
+      <input type="password" ng-model="answerTry">
+      <input type="number" ng-model="answerIndex" min="0" max="{{grid.answers.length}}">
+      
+      <div class="button" ng-click="sendAnswer()">Rispondi</div>
+    </div>
+        
     <script src="/public/scripts/util.js"></script>
     <script src="/public/scripts/gridsupplier.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
