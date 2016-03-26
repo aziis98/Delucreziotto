@@ -42,7 +42,7 @@ module.exports = function (express, __root) {
     
     logic.getMatch(info.match).addAction(action);
     
-    res.send(200);
+    res.sendStatus(200);
   })
     
   // GET the list of all the match registered on the server
@@ -56,14 +56,14 @@ module.exports = function (express, __root) {
   
   // Sub Specific Routes
   router.get('/:match', function (req, res) {
-    var matchKey = req.param('match');
+    var matchKey = req.params.match;
     
     res.json(logic.getMatch(matchKey));
   })
   
   router.get('/:match/:team', function (req, res) {
-    var matchKey = req.param('match');
-    var teamKey  = req.param('team');
+    var matchKey = req.params.match;
+    var teamKey  = req.params.team;
     
     res.json(logic.getMatch(matchKey).getTeam(teamKey));
   })

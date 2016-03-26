@@ -3,7 +3,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     
     $scope.matchKey = params['match'] || '';
     
-    $scope.answers = [ '' ];
+    $scope.answers = [ '0000' ];
     $scope.matchDerive = 1;
     var rDate = new Date();
     rDate.seconds(0);
@@ -41,11 +41,12 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     $scope.createMatch = function () {
       var matchInfo = {
         name: $scope.matchName,
-        answers: $scope.answers,
+        answers: $scope.answers.map(s => s.trim()),
         startTime: $scope.matchStartDatetime,
         options: {
           derive: $scope.matchDerive,
-          duration: $scope.matchDuration
+          duration: $scope.matchDuration,
+          answerIncreaseStopTime: new Date($scope.matchStartDatetime.getTime() + 1000 * 60 * 100)
         }
       };
       
@@ -59,7 +60,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     }
     
     $scope.newAnswer = function () {
-      $scope.answers.push('');
+      $scope.answers.push('0000');
     }
     
     $scope.delAnswer = function () {

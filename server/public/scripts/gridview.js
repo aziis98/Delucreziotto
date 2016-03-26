@@ -10,14 +10,16 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
     $scope.viewType = 'team';
   }
   
-  $http.get('/api/' + $scope.matchKey).then(function (res) {
-    $scope.match = res.data;
-    $scope.updateGrid();
-  });
-  
   if ($scope.viewType === 'team') {
     $http.get('/api/' + $scope.matchKey + '/' + $scope.teamKey).then(function (res) {
       $scope.team = res.data;
+    });
+  }
+  
+  $scope.updateGrid = function () {
+    $http.get('/api/' + $scope.matchKey).then(function (res) {
+      $scope.match = res.data;
+      $scope.grid = generateGrid('default', $scope.match);
     });
   }
   
@@ -25,22 +27,25 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
     $scope.updateGrid();
   }, 10000);
   
-  $scope.updateGrid = function () {
-    $scope.grid = generateGrid('default', $scope.match);
-  }
-  
   $scope.sendAnswer = function () {
     $http.post('/api/action', {
+      match: $scope.matchKey,
       type: 'answer',
       time: new Date(),
       data: {
         teamKey: $scope.teamKey,
-        index: $scope.answerIndex,
+        index: $scope.answerIndex - 1,
         answer: $scope.answerTry
       }
     }).then(function () {
       $scope.updateGrid();
     })
   };
+  
+  $scope.formatDate = function (date) {
+    return date.toDate().toLocaleString();
+  }
+  
+  $scope.updateGrid();
   
 });

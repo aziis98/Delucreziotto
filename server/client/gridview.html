@@ -9,13 +9,22 @@
   <body ng-controller="gridViewController">
     
     <header>
-      <h1>{{match.name}}</h1>
-      <h2 ng-show="viewType == 'team'">{{team.name}}</h2>
+      <div class="hstack">
+        <div class="vstack">
+          <h1>{{match.name}}</h1>
+          <h2 ng-show="viewType == 'team'">{{team.name}}</h2>
+        </div>
+        <div class="vstack">
+          <h2>Inizio: {{formatDate(match.start)}}</h2>
+        </div>
+      </div>
+      
     </header>
     
     <div class="gridpanel">
       <table>
         <tr>
+          
           <th>
             Domanda/Squadra
           </th>
@@ -25,10 +34,15 @@
               <span class="score">{{answer.score}}</span>
             </div>
           </th>
+          <th>
+            Totale
+          </th>
+          
         </tr>
         <tr ng-repeat="team in grid.teams">
           <th>{{team.name}}</th>
           <td ng-repeat="answer in team.answers track by $index">{{answer}}</td>
+          <td>{{team.score}}</td>
         </tr>
       </table>
     </div>
@@ -36,7 +50,7 @@
     <div>
       Inserisci risposta:
       <input type="password" ng-model="answerTry">
-      <input type="number" ng-model="answerIndex" min="0" max="{{grid.answers.length}}">
+      <input type="number" ng-model="answerIndex" min="1" max="{{grid.answers.length}}">
       
       <div class="button" ng-click="sendAnswer()">Rispondi</div>
     </div>

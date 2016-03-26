@@ -5,29 +5,54 @@ var gridSupplier = {
     var time = new Date(); // Now
     var answers = {};
     
+    _.each(match.actions, action => {
+      action.time = new Date(action.time);
+    });
+    
+    var sortedActions = _.sortBy(match.actions, action => action.time);
+    
     for (var i = 0; i < match.answers.length; i++) {
       answers[i] = calcAnswerScoreAt(match, i, time);
     }
     
+    var teams = _.mapObject(match.teams, team => ({
+      name: team.name,
+      score: match.answers.length * 10,
+      answers: listArray(match.answers.length, i => 0)
+    }));
+        
+    _.each(sortedActions, function (action) {
+      if (action.type === 'answer' && action.time < time) {
+        var team = teams[action.data.teamKey];
+        
+        if (action.data.answer == match.answers[action.data.index]) {
+          // Correct
+          var scoreData = calcAnswerScoreAt(match, i, new Date(action.time - 100));
+          var score = scoreData.score + answerBonus[scoreData.correctCount];
+          
+          team.score += score;
+          team.answers[action.data.index] = score;
+        }
+        else {
+          // Wrong
+          team.score -= 10;
+          team.answers[action.data.index] -= 10;
+        }
+      }
+    });
+        
     return {
       answers: answers,
-      teams: _.map(match.teams, team => ({
-        name: team.name,
-        score: 300,
-        answers: listArray(match.answers.length, i => 0)
-      }))
+      teams: teams
     }
-  },
-  'debug': function (match) {
+  }
+  ,
+  'simulated': function (match) {
+    
+    
     return {
-      answers: listObject(match.answers.length, i => ({
-        score: 20
-      })),
-      teams: _.map(match.teams, team => ({
-        name: team.name,
-        score: 300,
-        answers: listArray(match.answers.length, i => 0)
-      }))
+      answers: null,
+      teams: null
     }
   }
 };
@@ -37,25 +62,32 @@ function generateGrid(generatorName, match) {
 }
 
 function calcAnswerScoreAt(match, index, time) {
+  console.log('calcAnswerScoreAt(match, ' + index + ', ' + time +')');
   var correctAnswer = match.answers[index];
   
-  var specificAnswers = _.filter(match.actions, function (action) {
+  var answerAction = _.filter(match.actions, function (action) {
     return action.time <= time && action.type === 'answer' && action.data.index === index;
   });
   
-  specificAnswers = _.sortBy(specificAnswers, action => action.time)
-  
-  console.log(specificAnswers);
-  
+  answerAction = _.sortBy(answerAction, action => action.time)
+    
   var score = 20;
   var previousTime = new Date(match.start);
   var correctCount = 0;
-  
-  _.each(specificAnswers, function (action) {
+  console.log(score);
+  _.each(answerAction, function (action) {
+    console.log('action');
     if (correctCount < match.options.derive) {
-      score += minuteDifference(previousTime, action.time);
+      var dt = minuteDifference(action.time, match.options.answerIncreaseStopTime.toDate());
+      
+      if (time < match.options.answerIncreaseStopTime.toDate()) {
+        score += minuteDifference(previousTime, action.time);
+      }
+      else if (dt > 0) {
+        score += dt;
+      }
     }
-    
+    console.log(score);
     previousTime = action.time;
     
     if (action.data.answer == correctAnswer) {
@@ -64,9 +96,20 @@ function calcAnswerScoreAt(match, index, time) {
     else {
       score += 2;
     }
+    console.log(score);
   });
   
-  score += minuteDifference(previousTime, time);
+  var dt = minuteDifference(previousTime, match.options.answerIncreaseStopTime.toDate());
+  
+  if (time < match.options.answerIncreaseStopTime.toDate()) {
+    score += minuteDifference(previousTime, time);
+  }
+  else if (dt > 0) {
+    score += dt;
+  }
+  
+  console.log(score);
+  console.log('end');
   
   return {
     score: score,

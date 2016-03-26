@@ -45,6 +45,10 @@ Date.prototype.year = function (newYear) {
   return arguments.length == 0 ? this.getFullYear() : (this.setFullYear(newYear));
 };
 
+String.prototype.toDate = function () {
+  return new Date(this);
+};
+
 function listArray(size, fn) {
   var array = [];
   for (var i = 0; i < size; i++) {
