@@ -4,27 +4,42 @@ header
   display: flex
   flex-direction: column
   align-items: center
+  height: 140px
+  h1, h2
+    margin: 5px 0
 
 .gridpanel
   width: 90%
   background: $panel-background
   border: 1px solid $panel-border
   border-radius: 4px
-  .grid
+  box-sizing: border-box
+  padding: 10px
+  table
     width: 100%
-    .row
-      display: flex
-      
-      .head
-        flex: 1
-        &.question
-          text-align: center
-      .cell
-        flex: 1
-        &.answer
-          text-align: center
+    border-collapse: collapse
+    tr
+      th
+        border: 1px solid $panel-border
+        &:first-child
+          text-align: left
+        .question
+          display: flex
+          flex-direction: column
+          .score
+            font-weight: normal
+          
+      td
+        border: 1px solid $panel-border
+        margin-top: -1px
+        text-align: center
         &.jolly::after
           content: 'J'
           color: green
           font-weight: bold
+      th:first-child, td
+        padding-left: 10px
+        padding-right: 10px
+      th:first-child
+        width: 100px
           

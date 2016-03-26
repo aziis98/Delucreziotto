@@ -118,7 +118,9 @@ footer {
 .panel .content .inputPair .validator {
   position: absolute;
   top: 4px;
-  right: -50px;
+  right: -80px;
+  width: 75px;
+  text-align: left;
 }
 
 .panel .content .inputPair .validator-true {
@@ -252,6 +254,10 @@ span.spacer {
   margin-bottom: 10px;
 }
 
+.list .item:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -271,6 +277,11 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 140px;
+}
+
+header h1, header h2 {
+  margin: 5px 0;
 }
 
 .gridpanel {
@@ -278,34 +289,49 @@ header {
   background: #FFCC7A;
   border: 1px solid #FF8800;
   border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px;
 }
 
-.gridpanel .grid {
+.gridpanel table {
   width: 100%;
+  border-collapse: collapse;
 }
 
-.gridpanel .grid .row {
+.gridpanel table tr th {
+  border: 1px solid #FF8800;
+}
+
+.gridpanel table tr th:first-child {
+  text-align: left;
+}
+
+.gridpanel table tr th .question {
   display: flex;
+  flex-direction: column;
 }
 
-.gridpanel .grid .row .head {
-  flex: 1;
+.gridpanel table tr th .question .score {
+  font-weight: normal;
 }
 
-.gridpanel .grid .row .head.question {
+.gridpanel table tr td {
+  border: 1px solid #FF8800;
+  margin-top: -1px;
   text-align: center;
 }
 
-.gridpanel .grid .row .cell {
-  flex: 1;
-}
-
-.gridpanel .grid .row .cell.answer {
-  text-align: center;
-}
-
-.gridpanel .grid .row .cell.jolly::after {
+.gridpanel table tr td.jolly::after {
   content: 'J';
   color: green;
   font-weight: bold;
+}
+
+.gridpanel table tr th:first-child, .gridpanel table tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.gridpanel table tr th:first-child {
+  width: 100px;
 }

@@ -152,7 +152,9 @@ footer {
 .panel .content .inputPair .validator {
   position: absolute;
   top: 4px;
-  right: -50px;
+  right: -80px;
+  width: 75px;
+  text-align: left;
 }
 
 .panel .content .inputPair .validator-true {
@@ -294,6 +296,10 @@ span.spacer {
 
 .list .item:last-child {
   margin-bottom: 10px;
+}
+
+.list .item:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 ::-webkit-scrollbar {

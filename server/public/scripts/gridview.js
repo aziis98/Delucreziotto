@@ -1,4 +1,4 @@
-angular.module('gridViewApp', []).controller('gridViewController', function ($scope, $http) {
+angular.module('gridViewApp', []).controller('gridViewController', function ($scope, $http, $interval) {
   
   var params = getUrlRoutesData();
   
@@ -12,6 +12,7 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   
   $http.get('/api/' + $scope.matchKey).then(function (res) {
     $scope.match = res.data;
+    $scope.grid = generateGrid('debug', $scope.match);
   });
   
   if ($scope.viewType === 'team') {
@@ -19,5 +20,11 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
       $scope.team = res.data;
     });
   }
+  
+  $interval(function () {
+    $scope.grid = generateGrid('debug', $scope.match);
+  }, 2500);
+  
+  
   
 });

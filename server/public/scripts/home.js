@@ -12,7 +12,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     $scope.matchDuration = 120;
     
     $scope.onlineMatches = [];
-    
+        
     $http.get('/api/list').then(function (res) {
       _.each(res.data, function (match) {
         $scope.onlineMatches.push(match);
@@ -21,7 +21,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     
     $scope.testMatchKey = function () {
       $http.get('/api/has/' + $scope.matchKey).then(function (res) {
-        $scope.matchKeyValidator = res.data;
+        $scope.matchKeyValidator = res.data || false;
       })
     }
     

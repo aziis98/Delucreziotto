@@ -14,23 +14,27 @@
     </header>
     
     <div class="gridpanel">
-      <div class="grid">
-        <div class="row">
-          <div class="head">Domanda/Squadra</div>
-          <div class="head question" ng-repeat="answer in match.answers track by $index">
-            {{$index}}
-          </div>
-        </div>
-        <div class="row" ng-repeat="team in match.teams">
-          <div class="cell">{{team.name}}</div>
-          <div class="cell answer" ng-repeat="answer in [0,0,0,0,0,0] track by $index">
-            {{answer}}
-          </div>
-        </div>
-      </div>
+      <table>
+        <tr>
+          <th>
+            Domanda/Squadra
+          </th>
+          <th ng-repeat="answer in grid.answers track by $index">
+            <div class="question">
+              {{$index + 1}}
+              <span class="score">{{answer.score}}</span>
+            </div>
+          </th>
+        </tr>
+        <tr ng-repeat="team in grid.teams">
+          <th>{{team.name}}</th>
+          <td ng-repeat="answer in team.answers track by $index">{{answer}}</td>
+        </tr>
+      </table>
     </div>
     
     <script src="/public/scripts/util.js"></script>
+    <script src="/public/scripts/gridsupplier.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="/public/scripts/gridview.js" charset="utf-8"></script>
