@@ -94,7 +94,7 @@ var gridSupplier = {
           answers[i].score += 1;
           _.each(answers[i].braveTeams, function (teamKey) {
             var jollyFactor = 1;
-            if (teams[teamKey].jolly === actionData.index) {
+            if (teams[teamKey].jolly == i) {
               jollyFactor = 2;
             }
             

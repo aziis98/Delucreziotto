@@ -69,7 +69,7 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   
   var timeFromStart = function () {
     var diff = new Date() - $scope.match.start.toDate();
-    $scope.timeFromStart = Math.floor(diff / (60 * 60 * 1000)) + 'ore ' + Math.floor(diff / (60 * 1000)) % 60 + 'min ' + Math.floor(diff / 1000) % 60 + 's';
+    $scope.timeFromStart = Math.floor(diff / (60 * 60 * 1000)) + ' ore ' + Math.floor(diff / (60 * 1000)) % 60 + ' min ' + Math.floor(diff / 1000) % 60 + ' s';
   };
   
   $scope.updateGrid();

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html ng-app="gridViewApp">
+<html ng-app="gridViewApp" ng-controller="gridViewController">
   <head>
+    <title>{{team.name}} - {{match.name}}</title>
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href="/public/stylesheets/gridview.css">
   </head>
-  <body ng-controller="gridViewController">
+  <body>
     
     <header>
       <div class="hstack">
@@ -40,7 +41,7 @@
           </th>
           
         </tr>
-        <tr ng-repeat="team in grid.teams">
+        <tr ng-repeat="team in grid.teams | orderBy:'-score'">
           <th>{{team.name}}</th>
           <td ng-repeat="answer in team.answers track by $index" ng-class="{jolly: isJollyOf(team, $index)}">{{answer}}</td>
           <td>{{team.score}}</td>

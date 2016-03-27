@@ -29,6 +29,10 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     
     $scope.testMatchKey();
     
+    $scope.viewMatch = function () {
+      window.location.href = "/app/" + res.data.matchKey;
+    }
+    
     $scope.createTeam = function () {
       var teamInfo = {
         name: $scope.teamName.trim(),
