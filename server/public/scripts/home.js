@@ -1,3 +1,5 @@
+// Copyright 2016 Antonio De Lucreziis
+
 angular.module('homeApp', []).controller('homeController', function ($scope, $http) {
     var params = getParams();
     

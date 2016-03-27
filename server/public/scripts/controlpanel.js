@@ -1,3 +1,5 @@
+// Copyright 2016 Antonio De Lucreziis
+
 angular.module('adminPanel', []).controller('ctrlAdminPanel', function ($scope, $http, $interval) {
   var params = getParams();
   

@@ -1,3 +1,5 @@
+// Copyright 2016 Antonio De Lucreziis
+
 var answerBonus = [20, 15, 10, 8, 6, 5, 4, 3, 2, 1];
 
 var gridSupplier = {

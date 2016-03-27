@@ -1,3 +1,5 @@
+// Copyright 2016 Antonio De Lucreziis
+
 var _ = require('underscore');
 var util = require('util');
 var EventEmitter = require('events').EventEmitter;

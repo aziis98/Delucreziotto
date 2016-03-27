@@ -1,3 +1,5 @@
+// Copyright 2016 Antonio De Lucreziis
+
 letters = 'abcdefghiljkmnopqrstuvxywz';
 digits = '0123456789';
 chars = letters + letters.toUpperCase() + digits;

@@ -1,3 +1,5 @@
+// Copyright 2016 Antonio De Lucreziis
+
 angular.module('gridViewApp', []).controller('gridViewController', function ($scope, $http, $interval) {
   
   var params = getUrlRoutesData();

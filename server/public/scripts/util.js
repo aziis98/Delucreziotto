@@ -1,3 +1,4 @@
+// Copyright 2016 Antonio De Lucreziis
 
 function getUrlRoutesData() {
   return window.location.pathname.split('/').filter(function (str) {
