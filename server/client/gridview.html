@@ -4,7 +4,7 @@
     <title>{{team.name}} - {{match.name}}</title>
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    
+    <link rel="icon" href="/public/delucreziotto-1@small.png" type="image/png">
     <link rel="stylesheet" href="/public/stylesheets/gridview.css">
   </head>
   <body>
@@ -17,10 +17,9 @@
         </div>
         <div class="vstack">
           <h2>Inizio: {{formatDate(match.start)}}</h2>
-          <h2>Tempo trascorso: {{timeFromStart}}</h2>
+          <h2>Tempo rimanente: {{timeFromStart}}</h2>
         </div>
       </div>
-      
     </header>
     
     <div class="gridpanel">
