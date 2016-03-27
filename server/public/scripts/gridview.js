@@ -21,7 +21,8 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   $scope.updateGrid = function () {
     $http.get('/api/' + $scope.matchKey).then(function (res) {
       $scope.match = res.data;
-      $scope.grid = generateGrid('default', $scope.match);
+      $scope.grid = generateGrid('simulated', $scope.match);
+      timeFromStart();
     });
   }
   
@@ -41,12 +42,35 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
       }
     }).then(function () {
       $scope.updateGrid();
-    })
+    });
+  };
+  
+  $scope.sendJolly = function () {
+    $http.post('/api/action', {
+      match: $scope.matchKey,
+      type: 'jolly',
+      time: new Date(),
+      data: {
+        teamKey: $scope.teamKey,
+        index: $scope.jollyIndex - 1
+      }
+    }).then(function () {
+      $scope.updateGrid();
+    });
   };
   
   $scope.formatDate = function (date) {
     return date.toDate().toLocaleString();
+  };
+  
+  $scope.isJollyOf = function (team, index) {
+    return team.jolly === index;
   }
+  
+  var timeFromStart = function () {
+    var diff = new Date() - $scope.match.start.toDate();
+    $scope.timeFromStart = Math.floor(diff / (60 * 60 * 1000)) + 'ore ' + Math.floor(diff / (60 * 1000)) % 60 + 'min ' + Math.floor(diff / 1000) % 60 + 's';
+  };
   
   $scope.updateGrid();
   

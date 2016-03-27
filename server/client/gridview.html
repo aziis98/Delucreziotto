@@ -16,6 +16,7 @@
         </div>
         <div class="vstack">
           <h2>Inizio: {{formatDate(match.start)}}</h2>
+          <h2>Tempo trascorso: {{timeFromStart}}</h2>
         </div>
       </div>
       
@@ -41,19 +42,31 @@
         </tr>
         <tr ng-repeat="team in grid.teams">
           <th>{{team.name}}</th>
-          <td ng-repeat="answer in team.answers track by $index">{{answer}}</td>
+          <td ng-repeat="answer in team.answers track by $index" ng-class="{jolly: isJollyOf(team, $index)}">{{answer}}</td>
           <td>{{team.score}}</td>
         </tr>
       </table>
     </div>
     
-    <div>
-      Inserisci risposta:
-      <input type="password" ng-model="answerTry">
-      <input type="number" ng-model="answerIndex" min="1" max="{{grid.answers.length}}">
+    <div id="sendingpanel" class="hstack">
       
-      <div class="button" ng-click="sendAnswer()">Rispondi</div>
+      <div>
+        Inserisci risposta:
+        <input type="password" ng-model="answerTry" placeholder="Risposta...">
+        <input type="number" ng-model="answerIndex" min="1" placeholder="n° Domanda...">
+        
+        <div class="button" ng-click="sendAnswer()">Rispondi</div>
+      </div>
+      
+      <div>
+        Imposta Jolly:
+        <input type="number" ng-model="jollyIndex" min="1" placeholder="n° Domanda...">
+        
+        <div class="button" ng-click="sendJolly()">Imposta Jolly</div>
+      </div>
+      
     </div>
+    
         
     <script src="/public/scripts/util.js"></script>
     <script src="/public/scripts/gridsupplier.js"></script>
