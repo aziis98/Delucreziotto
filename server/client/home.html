@@ -1,11 +1,13 @@
-<html ng-app="homeApp">
+<html ng-app="homeApp" ng-controller="homeController">
   <head>
+    <title>Delucreziotto</title>
+    
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     
     <link rel="stylesheet" href="/public/stylesheets/core.css">
   </head>
-  <body ng-controller="homeController">
+  <body>
     
     <header>
       <div class="logo">
@@ -30,7 +32,7 @@
           <div class="validator validator-{{matchKeyValidator}}">{{matchKeyValidator ? 'Valid' : 'Invalid'}}</div>
         </div>
         
-        <div class="button">
+        <div class="button" ng-click="viewMatch()">
           Assisti
         </div>
         
