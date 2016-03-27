@@ -22,109 +22,13 @@ body
   align-items: center
   background: $body-background
  
-header
-  justify-content: center
-  display: flex
-  width: 90%
-  max-width: 900px
-  height: 200px
-  background: $panel-background
-  border-bottom-left-radius: 4px
-  border-bottom-right-radius: 4px
-  border: 1px solid $panel-border
-  border-top: none
-  margin-bottom: 50px
-  
-  .logo
-    display: flex
-    flex-direction: column
-    padding: 30px
-    font-size: 60px
-    
-    .subtitle
-      font-size: 17px
-      float: right
-      text-align: right
-      
-      a
-        font-size: 120%
-        text-decoration: none
-        color: gray
-        &:hover
-          color: lighten(blue, 10%)
 
-footer
-  padding: 10px 40px
-  width: 90%
-  max-width: 900px
-  margin-top: 50px
-  
-  border: 1px solid $panel-border
-  border-bottom: none
-  
-  border-top-left-radius: 4px
-  border-top-right-radius: 4px
-  
-  background: $panel-title
-  
-  display: flex
-  flex-direction: column
-  box-sizing: border-box
-  justify-content: center
-  align-items: flex-end
+@import siders
 
 
+@import control-panel
 
-
-
-
-
-
-.panel
-  position: relative
-  margin: 30px 0px
-  width: 80%
-  max-width: 750px
-  background: $panel-background
-  border: 1px solid $panel-border
-  border-radius: 4px
-  .title
-    box-sizing: border-box
-    font-size: 23px
-    text-align: center
-    padding: 15px
-    height: 60px
-    border-bottom: 1px solid $panel-border
-    background: $panel-title
-    border-top-left-radius: 4px
-    border-top-right-radius: 4px
-  .content
-    display: flex
-    align-items: center
-    flex-direction: column
-    padding: 15px 0px
-        
-    .inputSet
-      display: flex
-      flex-direction: column
-      align-items: flex-end
-      
-    .inputPair
-      margin: $def-margin / 2
-      label
-        display: inline-block
-        margin-right: 8px
-        text-align: left
-    
-    transition: height 1s linear
-    &.collapsed
-      height: 0
-      display: none
-
-
-
-
-
+@import control-largepanel
 
 
 p
@@ -132,57 +36,13 @@ p
 
 // Input Control Styling
 
-input
-  outline: none
-  border: 1px solid $panel-border
-  background: #FFD48E
-  font:
-    family: 'Roboto', sans-serif
-    size: 15px
-  color: black
-  text-align: center
-  width: 300px
-  height: 30px
-  padding: 0px 10px
-  border-radius: 2px
 
-  transition: border 0.25s linear, background 0.1s linear
-
-  &:focus
-    border: 1px solid #FF8900
-    background: #FFDCA5
-
-::-webkit-input-placeholder
-  color: $panel-border
+@import control-input
+@import control-button
 
 
 
 
-.button
-  display: inline-block
-  outline: none
-  border: 1px solid $panel-border
-  background: #FFD48E
-  
-  font:
-    family: 'Roboto', sans-serif
-    size: 15px
-  
-  height: 30px
-  margin: $def-margin 5px
-  padding: 0px 15px
-  padding-top: 3px
-  border-radius: 2px
-  box-sizing: border-box
-  -webkit-user-select: none
-  
-  &:hover
-    border: 1px solid #FF8900
-    background: #FFDCA5
-    cursor: pointer
-    
-    &:active
-      background: #FFA53D
       
 #boxDelAdd
   display: flex

@@ -11,13 +11,15 @@
     "url": "git+https://github.com/aziis98/Delucreziotto.git"
   },
   "author": "antonio.delucreziis@gmail.com",
-  "license": "ISC",
+  "private": true,
   "bugs": {
     "url": "https://github.com/aziis98/Delucreziotto/issues"
   },
   "homepage": "https://github.com/aziis98/Delucreziotto#readme",
   "dependencies": {
     "angular": "^1.5.2",
-    "express": "^4.13.4"
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "underscore": "^1.8.3"
   }
 }

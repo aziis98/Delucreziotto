@@ -4,15 +4,14 @@ Creato in sostituzione al sito 'campigotto' per giocare le gare a squadre online
 Ideal domain: https://www.delucreziotto.com
 
 ## Technologies Used
-In teoria l'app dovrebbe sfruttare la struttura MVC (Model View Controller) su cui Angular.js si basa.
 
 *Server*:
 - Express.js
 
 ### View
 - Framework: Angular.js
-- Css Preprocessor: Less
-- JS Preprocessor: Coffescript
+- Css Preprocessor: Sass
+- JS Preprocessor: None for now
 
 ## Structure
 ### Routers
@@ -45,7 +44,7 @@ var request = {
 ```
 
 ### Model
-Legenda: **type : label**, 42 = any number, 3.14 = any decimal
+Legenda: `type:label`, `42` = any number, `3.14` = any decimal
 
 ```javascript
 var model = {
@@ -87,4 +86,6 @@ var am = a.minutes(); // Gets the minutes of the Date -- Getter polyfill
 | /app/:match | used for the direct link to the match (for spectators). Here every one can watch a match |
 | /app/:match/:team | direct link to the team setting page, here the team can choose the "Jolly" and answer questions |
 
-Userò AngularJS solo lato client e nessun 'template engine' lato server
+E' stato usato AngularJS per il lato client e nessun 'template engine' per il lato server.
+
+Per la creazione delle squadre si può usare il link a `/app?match=r923h92h3r9`

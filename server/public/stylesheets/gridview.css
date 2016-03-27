@@ -8,25 +8,15 @@ body {
 }
 
 body {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   width: 100%;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
+  align-items: center;
   background: #FFE0AA;
 }
 
 header {
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  display: -webkit-flex;
-  display: -ms-flexbox;
+  justify-content: center;
   display: flex;
   width: 90%;
   max-width: 900px;
@@ -40,12 +30,8 @@ header {
 }
 
 header .logo {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   padding: 30px;
   font-size: 60px;
 }
@@ -76,19 +62,11 @@ footer {
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   background: #FFA53D;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  flex-direction: column;
   box-sizing: border-box;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  justify-content: center;
+  align-items: flex-end;
 }
 
 .panel {
@@ -114,28 +92,16 @@ footer {
 }
 
 .panel .content {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
+  flex-direction: column;
   padding: 15px 0px;
 }
 
 .panel .content .inputSet {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-align-items: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
 }
 
 .panel .content .inputPair {
@@ -188,15 +154,9 @@ footer {
 }
 
 .largepanel .content {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  align-items: center;
+  flex-direction: column;
   padding: 15px 0px;
 }
 
@@ -255,12 +215,8 @@ input:focus {
 }
 
 #boxDelAdd {
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  justify-content: flex-end;
   width: 100%;
 }
 
@@ -315,4 +271,93 @@ span.spacer {
 ::-webkit-scrollbar-thumb {
   border-radius: 4px;
   background: #ffb866;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 140px;
+}
+
+header h1, header h2 {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.gridpanel {
+  width: 90%;
+  background: #FFCC7A;
+  border: 1px solid #FF8800;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.gridpanel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.gridpanel table tr th {
+  border: 1px solid #FF8800;
+}
+
+.gridpanel table tr th:first-child {
+  text-align: left;
+}
+
+.gridpanel table tr th .question {
+  display: flex;
+  flex-direction: column;
+}
+
+.gridpanel table tr th .question .score {
+  font-weight: normal;
+}
+
+.gridpanel table tr td {
+  border: 1px solid #FF8800;
+  margin-top: -1px;
+  text-align: center;
+}
+
+.gridpanel table tr td.jolly::after {
+  content: 'J';
+  color: green;
+  font-weight: bold;
+}
+
+.gridpanel table tr th:first-child, .gridpanel table tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.gridpanel table tr th:first-child {
+  width: 100px;
+}
+
+.vstack {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.hstack {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: row;
+  justify-content: space-around;
+}
+
+#sendingpanel {
+  position: fixed;
+  bottom: 0px;
+  height: 50px;
+  padding: 20px;
+  background: #FFCC7A;
+  border: 1px solid #FF8800;
 }

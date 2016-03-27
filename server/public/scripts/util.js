@@ -1,4 +1,10 @@
+// Copyright 2016 Antonio De Lucreziis
 
+function getUrlRoutesData() {
+  return window.location.pathname.split('/').filter(function (str) {
+    return str.length > 0;
+  });
+}
 
 function getParams() {
   var params = {};
@@ -39,3 +45,23 @@ Date.prototype.month = function (newMonth) {
 Date.prototype.year = function (newYear) {
   return arguments.length == 0 ? this.getFullYear() : (this.setFullYear(newYear));
 };
+
+String.prototype.toDate = function () {
+  return new Date(this);
+};
+
+function listArray(size, fn) {
+  var array = [];
+  for (var i = 0; i < size; i++) {
+    array.push(fn(i));
+  }
+  return array;
+}
+
+function listObject(size, fn) {
+  var array = {};
+  for (var i = 0; i < size; i++) {
+    array[i] = fn(i);
+  }
+  return array;
+}

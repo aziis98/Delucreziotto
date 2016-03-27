@@ -1,3 +1,9 @@
+// Copyright 2016 Antonio De Lucreziis
+
+require('./public/scripts/util.js');
+
+var logic = require('./logic/logic.js');
+
 var express = require('express');
 var app = express();
 

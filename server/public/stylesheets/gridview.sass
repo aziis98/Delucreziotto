@@ -1,0 +1,67 @@
+@import core.sass
+
+header
+  display: flex
+  flex-direction: column
+  align-items: center
+  height: 140px
+  h1, h2
+    margin: 5px 0
+    text-align: center
+
+.gridpanel
+  width: 90%
+  background: $panel-background
+  border: 1px solid $panel-border
+  border-radius: 4px
+  box-sizing: border-box
+  padding: 10px
+  table
+    width: 100%
+    border-collapse: collapse
+    tr
+      th
+        border: 1px solid $panel-border
+        &:first-child
+          text-align: left
+        .question
+          display: flex
+          flex-direction: column
+          .score
+            font-weight: normal
+          
+      td
+        border: 1px solid $panel-border
+        margin-top: -1px
+        text-align: center
+        &.jolly::after
+          content: 'J'
+          color: green
+          font-weight: bold
+      th:first-child, td
+        padding-left: 10px
+        padding-right: 10px
+      th:first-child
+        width: 100px
+          
+
+.vstack
+  display: flex
+  width: 100%
+  height: 100%
+  flex-direction: column
+  justify-content: space-around
+.hstack
+  display: flex
+  width: 100%
+  height: 100%
+  flex-direction: row
+  justify-content: space-around
+
+#sendingpanel
+  position: fixed
+  bottom: 0px
+  height: 50px
+  padding: 20px
+  background: $panel-background
+  border: 1px solid $panel-border

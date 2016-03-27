@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="gridViewApp">
+  <head>
+    <!-- Roboto Font Link -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    
+    <link rel="stylesheet" href="/public/stylesheets/gridview.css">
+  </head>
+  <body ng-controller="gridViewController">
+    
+    <header>
+      <div class="hstack">
+        <div class="vstack">
+          <h1>{{match.name}}</h1>
+          <h2 ng-show="viewType == 'team'">{{team.name}}</h2>
+        </div>
+        <div class="vstack">
+          <h2>Inizio: {{formatDate(match.start)}}</h2>
+          <h2>Tempo trascorso: {{timeFromStart}}</h2>
+        </div>
+      </div>
+      
+    </header>
+    
+    <div class="gridpanel">
+      <table>
+        <tr>
+          
+          <th>
+            Domanda/Squadra
+          </th>
+          <th ng-repeat="answer in grid.answers track by $index">
+            <div class="question">
+              {{$index + 1}}
+              <span class="score">{{answer.score}}</span>
+            </div>
+          </th>
+          <th>
+            Totale
+          </th>
+          
+        </tr>
+        <tr ng-repeat="team in grid.teams">
+          <th>{{team.name}}</th>
+          <td ng-repeat="answer in team.answers track by $index" ng-class="{jolly: isJollyOf(team, $index)}">{{answer}}</td>
+          <td>{{team.score}}</td>
+        </tr>
+      </table>
+    </div>
+    
+    <div id="sendingpanel" class="hstack">
+      
+      <div>
+        Inserisci risposta:
+        <input type="password" ng-model="answerTry" placeholder="Risposta...">
+        <input type="number" ng-model="answerIndex" min="1" placeholder="n° Domanda...">
+        
+        <div class="button" ng-click="sendAnswer()">Rispondi</div>
+      </div>
+      
+      <div>
+        Imposta Jolly:
+        <input type="number" ng-model="jollyIndex" min="1" placeholder="n° Domanda...">
+        
+        <div class="button" ng-click="sendJolly()">Imposta Jolly</div>
+      </div>
+      
+    </div>
+    
+        
+    <script src="/public/scripts/util.js"></script>
+    <script src="/public/scripts/gridsupplier.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    <script src="/public/scripts/gridview.js" charset="utf-8"></script>
+  </body>
+</html>

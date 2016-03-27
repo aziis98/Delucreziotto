@@ -24,9 +24,10 @@
       <div class="content">
         <p>Inserisci la chiave della partita alla quale vuoi assistere.</p>
         
-        <div>
+        <div class="inputPair">
           <label for="txt1m">Chiave</label>
-          <input id="txt1m" type="text" ng-model="matchKey" spellcheck="false">
+          <input id="txt1m" type="text" ng-model="matchKey" ng-change="testMatchKey()" ng-model-options="{ debounce: 500 }" spellcheck="false">
+          <div class="validator validator-{{matchKeyValidator}}">{{matchKeyValidator ? 'Valid' : 'Invalid'}}</div>
         </div>
         
         <div class="button">
@@ -66,7 +67,8 @@
         <div class="inputSet">
           <div class="inputPair">
             <label for="txt2m">Chiave</label>
-            <input id="txt2m" type="text" ng-model="matchKey" spellcheck="false">
+            <input id="txt2m" type="text" ng-model="matchKey" ng-change="testMatchKey()" ng-model-options="{ debounce: 250 }" spellcheck="false">
+            <div class="validator validator-{{matchKeyValidator}}">{{matchKeyValidator ? 'Valid' : 'Invalid'}}</div>
           </div>
           
           <div class="inputPair">
@@ -75,9 +77,7 @@
           </div>
         </div>
         
-        <div class="button">
-          Partecipa
-        </div>
+        <div class="button" ng-click="createTeam()">Partecipa</div>
         
       </div>
     </div>
@@ -128,7 +128,16 @@
           </div>
         </div>
         
-        <div class="button">Crea Gara</div>
+        <div class="button" ng-click="createMatch()">Crea Gara</div>
+        
+        <div class="newmatch" ng-show="matchinfo != undefined">
+          <p>La chiave della partita è: {{matchinfo.key}}</p>
+          <p>La password per accedere al pannello di controllo della gara è: {{matchinfo.adminKey}}</p>
+          <span class="spacer"></span>
+          <p>Link al pannello di controllo: <a href="/app/admin?match={{matchinfo.key}}&pass={{matchinfo.adminKey}}">/app/admin?match={{matchinfo.key}}&pass={{matchinfo.adminKey}}</a></p>
+          <p>Link per vedere la partita: <a href="/app/{{matchinfo.key}}">/app/{{matchinfo.key}}</a></p>
+          <p>Link per partecipare alla partita: <a href="/app?match={{matchinfo.key}}">/app?match={{matchinfo.key}}</a></p>
+        </div>
         
       </div>
     </div>
@@ -138,6 +147,7 @@
     </footer>
     
     <script src="/public/scripts/util.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
     <script src="/public/scripts/home.js"></script>
   </body>

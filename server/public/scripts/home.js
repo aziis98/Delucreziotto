@@ -1,9 +1,11 @@
-angular.module('homeApp', []).controller('homeController', function ($scope) {
+// Copyright 2016 Antonio De Lucreziis
+
+angular.module('homeApp', []).controller('homeController', function ($scope, $http) {
     var params = getParams();
     
     $scope.matchKey = params['match'] || '';
     
-    $scope.answers = [ '' ];
+    $scope.answers = [ '0000' ];
     $scope.matchDerive = 1;
     var rDate = new Date();
     rDate.seconds(0);
@@ -11,51 +13,56 @@ angular.module('homeApp', []).controller('homeController', function ($scope) {
     $scope.matchStartDatetime = rDate;
     $scope.matchDuration = 120;
     
-    $scope.onlineMatches = [
-      {
-        name: "Gara di allenamento",
-        key: "32r08u0j2",
-        status: 'ended',
-        start: new Date()
-      },
-      {
-        name: "Semifinale di Cesenatico",
-        key: "f4j0jf2n2",
-        status: 'started',
-        start: new Date()
-      },
-      {
-        name: 'Finale di Cesenatico',
-        key: 'jh8fh4320',
-        status: 'not started',
-        start: new Date()
-      },
-      {
-        name: "Gara di allenamento",
-        key: "32r08u0j2",
-        status: 'ended',
-        start: new Date()
-      },
-      {
-        name: "Semifinale di Cesenatico",
-        key: "f4j0jf2n2",
-        status: 'started',
-        start: new Date()
-      },
-      {
-        name: 'Finale di Cesenatico',
-        key: 'jh8fh4320',
-        status: 'not started',
-        start: new Date()
-      }
-    ];
+    $scope.onlineMatches = [];
+        
+    $http.get('/api/list').then(function (res) {
+      _.each(res.data, function (match) {
+        $scope.onlineMatches.push(match);
+      })
+    });
     
+    $scope.testMatchKey = function () {
+      $http.get('/api/has/' + $scope.matchKey).then(function (res) {
+        $scope.matchKeyValidator = res.data || false;
+      })
+    }
+    
+    $scope.testMatchKey();
+    
+    $scope.createTeam = function () {
+      var teamInfo = {
+        name: $scope.teamName.trim(),
+        match: $scope.matchKey
+      };
+      
+      $http.post('/api/newteam', teamInfo).then(function (res) {
+        window.location.href = "/app/" + res.data.matchKey + "/" + res.data.key;
+      });
+    }
+    
+    $scope.createMatch = function () {
+      var matchInfo = {
+        name: $scope.matchName,
+        answers: $scope.answers.map(s => s.trim()),
+        startTime: $scope.matchStartDatetime,
+        options: {
+          derive: $scope.matchDerive,
+          duration: $scope.matchDuration,
+          answerIncreaseStopTime: new Date($scope.matchStartDatetime.getTime() + 1000 * 60 * 100)
+        }
+      };
+      
+      $http.post('/api/newmatch', matchInfo).then(function (res) {
+        $scope.matchinfo = res.data;
+      });
+    }
+        
     $scope.setMatchKey = function (key) {
       $scope.matchKey = key;
     }
     
     $scope.newAnswer = function () {
-      $scope.answers.push('');
+      $scope.answers.push('0000');
     }
     
     $scope.delAnswer = function () {
@@ -65,6 +72,16 @@ angular.module('homeApp', []).controller('homeController', function ($scope) {
     }
     
     $scope.formatDate = function(date) {
-      return date.day() + '/' + date.month() + '/' + date.year() + ' ' + date.hours() + ':' + date.minutes();
+      var d = new Date(date);
+      return format2Digit(d.day()) + '/' + format2Digit(d.month()) + '/' + d.year() + ' ' + format2Digit(d.hours()) + ':' + format2Digit(d.minutes());
+    }
+    
+    function format2Digit(number) {
+      if (number < 10) {
+        return '0' + number;
+      }
+      else {
+        return number;
+      }
     }
 });
