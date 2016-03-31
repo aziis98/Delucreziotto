@@ -29,7 +29,7 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   
   $interval(function () {
     $scope.updateGrid();
-  }, 10000);
+  }, 1000);
   
   $scope.sendAnswer = function () {
     $http.post('/api/action', {
