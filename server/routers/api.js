@@ -35,12 +35,38 @@ module.exports = function (express, __root) {
     });
   })
   
+  router.get('/live', function (req, res) {
+    res.socket.setTimeout(10000000);
+    
+    res.writeHead(200, {
+      'Content-Type': 'text/event-stream',
+      'Cache-Control': 'no-cache',
+      'Connection': 'keep-alive'
+    });
+    res.write('\n');
+    
+    logic.openConnections.push(res);
+    
+    req.on("close", function() {
+      var toRemove;
+      for (var j =0 ; j < logic.openConnections.length ; j++) {
+        if (logic.openConnections[j] == res) {
+          toRemove =j;
+          break;
+        }
+      }
+      logic.openConnections.splice(j,1);
+      console.log('Current connections: ' + logic.openConnections.length);
+    });
+  })
+  
   // Match action, see logic.js for the expected syntax
   router.post('/action', function (req, res) {
     var info = req.body;
     var action = new Action(info.type, info.time, info.data);
     
     logic.getMatch(info.match).addAction(action);
+    logic.sendMessage({message: 'action!'})
     
     res.sendStatus(200);
   })

@@ -356,7 +356,7 @@ header h1, header h2 {
 #sendingpanel {
   position: fixed;
   bottom: 0px;
-  height: 50px;
+  height: 90px;
   padding: 20px;
   background: #FFCC7A;
   border: 1px solid #FF8800;

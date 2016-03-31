@@ -3,6 +3,7 @@
 var answerBonus = [20, 15, 10, 8, 6, 5, 4, 3, 2, 1];
 
 var gridSupplier = {
+  /*
   'default': function (match) {
     var time = new Date(); // Now
     var answers = {};
@@ -48,12 +49,13 @@ var gridSupplier = {
       teams: teams
     }
   }
-  ,
+  ,*/
   'simulated': function (match) {
-    console.log('\n\n\nSimulating Grid...');
+    console.log('Simulating Grid...');
+    console.time('simulation');
     var minutesFromStart = minuteDifference(match.start.toDate(), new Date());
     var limit100th = match.options.answerIncreaseStopTime.toDate();
-    console.log(minutesFromStart);
+    // console.log(minutesFromStart);
     
     var answerCount = match.answers.length;
     
@@ -110,7 +112,7 @@ var gridSupplier = {
         
         while (currentAction != undefined && currentAction.time.toDate() < endOfMinuteTime) {
           sortedActions = _.tail(sortedActions);
-          console.log(currentAction);
+          // console.log(currentAction);
           
           if (currentAction.type === 'jolly') {
             teams[currentAction.data.teamKey].jolly = currentAction.data.index;
@@ -148,6 +150,8 @@ var gridSupplier = {
       
     }
     
+    console.timeEnd('simulation');
+    
     return {
       answers: answers,
       teams: teams
@@ -159,6 +163,7 @@ function generateGrid(generatorName, match) {
   return gridSupplier[generatorName](match);
 }
 
+/*
 function calcAnswerScoreAt(match, index, time) {
   console.log('calcAnswerScoreAt(match, ' + index + ', ' + time +')');
   var correctAnswer = match.answers[index];
@@ -214,6 +219,7 @@ function calcAnswerScoreAt(match, index, time) {
     correctCount: correctCount
   };
 }
+*/
 
 function minuteDifference(time1, time2) {
   return Math.floor((time2 - time1) / 60000);

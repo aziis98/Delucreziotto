@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html ng-app="gridViewApp" ng-controller="gridViewController">
   <head>
-    <title>{{team.name}} - {{match.name}}</title>
+    <title>{{pageTitle}}</title>
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="icon" href="/public/delucreziotto-1@small.png" type="image/png">
     <link rel="stylesheet" href="/public/stylesheets/gridview.css">
+    
+    <script src="/public/scripts/util.js"></script>
+    <script src="/public/scripts/gridsupplier.js"></script>
+    
+    <script src="/public/vendor/angular.min.js" charset="utf-8"></script>
+    <script src="/public/vendor/underscore.min.js" charset="utf-8"></script>
   </head>
   <body>
     
@@ -13,7 +19,7 @@
       <div class="hstack">
         <div class="vstack">
           <h1>{{match.name}}</h1>
-          <h2 ng-show="viewType == 'team'">{{team.name}}</h2>
+          <h2 ng-show="teamMode">{{team.name}}</h2>
         </div>
         <div class="vstack">
           <h2>Inizio: {{formatDate(match.start)}}</h2>
@@ -40,7 +46,7 @@
           </th>
           
         </tr>
-        <tr ng-repeat="team in grid.teams | orderBy:'-score'">
+        <tr ng-repeat="team in grid.teamArray | orderBy:'-score'">
           <th>{{team.name}}</th>
           <td ng-repeat="answer in team.answers track by $index" ng-class="{jolly: isJollyOf(team, $index)}">{{answer}}</td>
           <td>{{team.score}}</td>
@@ -48,7 +54,7 @@
       </table>
     </div>
     
-    <div id="sendingpanel" class="hstack">
+    <div id="sendingpanel" class="hstack" ng-show="teamMode">
       
       <div>
         Inserisci risposta:
@@ -68,10 +74,7 @@
     </div>
     
         
-    <script src="/public/scripts/util.js"></script>
-    <script src="/public/scripts/gridsupplier.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+    
     <script src="/public/scripts/gridview.js" charset="utf-8"></script>
   </body>
 </html>
