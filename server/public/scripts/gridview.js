@@ -11,13 +11,23 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
     $scope.teamKey = params[2];
     $scope.teamMode = true;
   }
+  
+  $scope.pageTitle = function () {
+    try {
+      if ($scope.teamMode) {
+        return $scope.team.name + ' - ' + $scope.match.name;
+      }
+      else {
+        return $scope.match.name;
+      }
+    } catch (e) {
+      return 'Delucreziotto';
+    }
+  }
     
   $scope.updateGrid = function () {
     $http.get('/api/' + $scope.matchKey).then(function (res) {
       $scope.match = res.data;
-      if (!$scope.teamMode) {
-        $scope.pageTitle = $scope.match.name;
-      }
       $scope.grid = generateGrid('simulated', $scope.match);
       $scope.grid.teamArray = _.values($scope.grid.teams);
       updateRemainingTime();
@@ -90,7 +100,6 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   if ($scope.teamMode) {
     $http.get('/api/' + $scope.matchKey + '/' + $scope.teamKey).then(function (res) {
       $scope.team = res.data;
-      $scope.pageTitle = $scope.team.name + ' - ' + $scope.match.name;
     });
   }
   
