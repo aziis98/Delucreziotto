@@ -22,6 +22,7 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
     $http.get('/api/' + $scope.matchKey).then(function (res) {
       $scope.match = res.data;
       $scope.grid = generateGrid('simulated', $scope.match);
+      $scope.grid.teamArray = _.values($scope.grid.teams);
       updateRemainingTime();
     });
   }
@@ -60,7 +61,7 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   };
   
   $scope.formatDate = function (date) {
-    return date.toDate().toLocaleString();
+    return (date || '').toDate().toLocaleString();
   };
   
   $scope.isJollyOf = function (team, index) {
@@ -69,9 +70,28 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   
   var updateRemainingTime = function () {
     var diff = new Date($scope.match.start.toDate().getTime() + $scope.match.options.duration * 60 * 1000 - new Date().getTime());
-    $scope.timeFromStart = Math.floor(diff / (60 * 60 * 1000)) + ' ore ' + Math.floor(diff / (60 * 1000)) % 60 + ' min ' + Math.floor(diff / 1000) % 60 + ' s';
+    $scope.timeFromStart = Math.floor(diff / (60 * 60 * 1000)) + ' ore ' +
+                            Math.floor(diff / (60 * 1000)) % 60 + ' min ' +
+                            Math.floor(diff / 1000) % 60 + ' s';
   };
+  
+  var handleServerEvent = function (msg) {
+    $scope.$apply(function () {
+      var data = JSON.parse(msg.data);
+      console.log('MESSAGE!');
+      console.log(data);
+      // if (data.message === 'action!') {
+      //   $scope.updateGrid();
+      // }
+      // else {
+      //   console.log('Got message from the server:');
+      //   console.log(data);
+      // }
+    })
+  }
   
   $scope.updateGrid();
   
+  var source = new EventSource('/api/live');
+  source.addEventListener('message', handleServerEvent, false);
 });

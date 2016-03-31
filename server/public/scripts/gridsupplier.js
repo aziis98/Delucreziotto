@@ -3,6 +3,7 @@
 var answerBonus = [20, 15, 10, 8, 6, 5, 4, 3, 2, 1];
 
 var gridSupplier = {
+  /*
   'default': function (match) {
     var time = new Date(); // Now
     var answers = {};
@@ -48,7 +49,7 @@ var gridSupplier = {
       teams: teams
     }
   }
-  ,
+  ,*/
   'simulated': function (match) {
     console.log('\n\n\nSimulating Grid...');
     var minutesFromStart = minuteDifference(match.start.toDate(), new Date());
@@ -159,6 +160,7 @@ function generateGrid(generatorName, match) {
   return gridSupplier[generatorName](match);
 }
 
+/*
 function calcAnswerScoreAt(match, index, time) {
   console.log('calcAnswerScoreAt(match, ' + index + ', ' + time +')');
   var correctAnswer = match.answers[index];
@@ -214,6 +216,7 @@ function calcAnswerScoreAt(match, index, time) {
     correctCount: correctCount
   };
 }
+*/
 
 function minuteDifference(time1, time2) {
   return Math.floor((time2 - time1) / 60000);

@@ -9,8 +9,17 @@ require('../logic/header.js');
 var Logic = function() {
   var self = this;
   
+  this.openConnections = [];
   this.matches = {};
   this.clock = 0;
+  
+  this.sendMessage = function (message) {
+    self.openConnections.forEach(function (connection) {
+      var d = new Date();
+      connection.write('id: ' + d.getMilliseconds() + '\n');
+      connection.write('data: ' + JSON.stringify(message) + '\n\n');
+    })
+  }
   
   this.addMatch = function (match) {
     self.matches[match.key] = match;
