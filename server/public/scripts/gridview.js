@@ -78,16 +78,14 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   var handleServerEvent = function (msg) {
     $scope.$apply(function () {
       var data = JSON.parse(msg.data);
-      console.log('MESSAGE!');
-      console.log(data);
-      // if (data.message === 'action!') {
-      //   $scope.updateGrid();
-      // }
-      // else {
-      //   console.log('Got message from the server:');
-      //   console.log(data);
-      // }
-    })
+      if (data.message === 'action!') {
+        $scope.updateGrid();
+      }
+      else {
+        console.log('Got message from the server:');
+        console.log(data);
+      }
+    });
   }
   
   $scope.updateGrid();

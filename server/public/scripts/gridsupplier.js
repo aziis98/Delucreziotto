@@ -51,10 +51,11 @@ var gridSupplier = {
   }
   ,*/
   'simulated': function (match) {
-    console.log('\n\n\nSimulating Grid...');
+    console.log('Simulating Grid...');
+    console.time('simulation');
     var minutesFromStart = minuteDifference(match.start.toDate(), new Date());
     var limit100th = match.options.answerIncreaseStopTime.toDate();
-    console.log(minutesFromStart);
+    // console.log(minutesFromStart);
     
     var answerCount = match.answers.length;
     
@@ -111,7 +112,7 @@ var gridSupplier = {
         
         while (currentAction != undefined && currentAction.time.toDate() < endOfMinuteTime) {
           sortedActions = _.tail(sortedActions);
-          console.log(currentAction);
+          // console.log(currentAction);
           
           if (currentAction.type === 'jolly') {
             teams[currentAction.data.teamKey].jolly = currentAction.data.index;
@@ -148,6 +149,8 @@ var gridSupplier = {
       
       
     }
+    
+    console.timeEnd('simulation');
     
     return {
       answers: answers,
