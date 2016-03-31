@@ -56,7 +56,7 @@ module.exports = function (express, __root) {
         }
       }
       logic.openConnections.splice(j,1);
-      console.log('Current connections: ' + logic.openConnections.length);
+      // console.log('Current connections: ' + logic.openConnections.length);
     });
   })
   

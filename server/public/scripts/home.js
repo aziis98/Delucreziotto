@@ -30,7 +30,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
     $scope.testMatchKey();
     
     $scope.viewMatch = function () {
-      window.location.href = "/app/" + res.data.matchKey;
+      window.location.href = "/app/" + $scope.matchKey;
     }
     
     $scope.createTeam = function () {
@@ -63,6 +63,7 @@ angular.module('homeApp', []).controller('homeController', function ($scope, $ht
         
     $scope.setMatchKey = function (key) {
       $scope.matchKey = key;
+      $scope.testMatchKey();
     }
     
     $scope.newAnswer = function () {
