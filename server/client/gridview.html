@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="gridViewApp" ng-controller="gridViewController">
   <head>
-    <title>{{team.name}} - {{match.name}}</title>
+    <title>{{pageTitle}}</title>
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="icon" href="/public/delucreziotto-1@small.png" type="image/png">
@@ -19,7 +19,7 @@
       <div class="hstack">
         <div class="vstack">
           <h1>{{match.name}}</h1>
-          <h2 ng-show="viewType == 'team'">{{team.name}}</h2>
+          <h2 ng-show="teamMode">{{team.name}}</h2>
         </div>
         <div class="vstack">
           <h2>Inizio: {{formatDate(match.start)}}</h2>
@@ -54,7 +54,7 @@
       </table>
     </div>
     
-    <div id="sendingpanel" class="hstack" ng-show="viewType == 'team'">
+    <div id="sendingpanel" class="hstack" ng-show="teamMode">
       
       <div>
         Inserisci risposta:

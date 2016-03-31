@@ -5,22 +5,19 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   var params = getUrlRoutesData();
   
   $scope.matchKey = params[1];
-  $scope.viewType = 'match';
+  $scope.teamMode = false;
   
   if (params.length > 2) {
     $scope.teamKey = params[2];
-    $scope.viewType = 'team';
+    $scope.teamMode = true;
   }
-  
-  if ($scope.viewType === 'team') {
-    $http.get('/api/' + $scope.matchKey + '/' + $scope.teamKey).then(function (res) {
-      $scope.team = res.data;
-    });
-  }
-  
+    
   $scope.updateGrid = function () {
     $http.get('/api/' + $scope.matchKey).then(function (res) {
       $scope.match = res.data;
+      if (!$scope.teamMode) {
+        $scope.pageTitle = $scope.match.name;
+      }
       $scope.grid = generateGrid('simulated', $scope.match);
       $scope.grid.teamArray = _.values($scope.grid.teams);
       updateRemainingTime();
@@ -89,6 +86,13 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   }
   
   $scope.updateGrid();
+  
+  if ($scope.teamMode) {
+    $http.get('/api/' + $scope.matchKey + '/' + $scope.teamKey).then(function (res) {
+      $scope.team = res.data;
+      $scope.pageTitle = $scope.team.name + ' - ' + $scope.match.name;
+    });
+  }
   
   var source = new EventSource('/api/live');
   source.addEventListener('message', handleServerEvent, false);
