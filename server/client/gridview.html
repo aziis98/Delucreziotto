@@ -2,6 +2,8 @@
 <html ng-app="gridViewApp" ng-controller="gridViewController">
   <head>
     <title>{{pageTitle()}}</title>
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+    
     <!-- Roboto Font Link -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link rel="icon" href="/public/delucreziotto-1@small.png" type="image/png">
@@ -56,15 +58,18 @@
     
     <div id="sendingpanel" class="hstack" ng-show="teamMode">
       
-      <div>
+      <div class="vstack">
         Inserisci risposta:
         <input type="password" ng-model="answerTry" placeholder="Risposta...">
         <input type="number" ng-model="answerIndex" min="1" placeholder="n° Domanda...">
-        
+        <div class="hstack">
+          <input type="datetime-local" ng-model="answerDate">
+          <div class="button" ng-click="updateAnswerTime()">Aggiorna Orario</div>
+        </div>
         <div class="button" ng-click="sendAnswer()">Rispondi</div>
       </div>
       
-      <div>
+      <div class="vstack">
         Imposta Jolly:
         <input type="number" ng-model="jollyIndex" min="1" placeholder="n° Domanda...">
         

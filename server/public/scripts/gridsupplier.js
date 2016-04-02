@@ -128,12 +128,14 @@ var gridSupplier = {
             }
             
             if (actionData.answer == match.answers[actionData.index]) {
-              var gainScore = answerData.score + answerBonus[answerData.correctCount]
-              
-              teams[actionData.teamKey].score += gainScore * jollyFactor;
-              teams[actionData.teamKey].answers[actionData.index] = gainScore * jollyFactor;
-              answerData.correctAnswer++;
-              answerData.braveTeams.push(actionData.teamKey);
+              if (!_.contains(answerData.braveTeams, actionData.teamKey)) {
+                var gainScore = answerData.score + answerBonus[answerData.correctCount]
+                
+                teams[actionData.teamKey].score += gainScore * jollyFactor;
+                teams[actionData.teamKey].answers[actionData.index] = gainScore * jollyFactor;
+                answerData.correctAnswer++;
+                answerData.braveTeams.push(actionData.teamKey);
+              }             
             }
             else {
               teams[actionData.teamKey].score -= 10 * jollyFactor;
