@@ -39,10 +39,13 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   }, 1000);
   
   $scope.sendAnswer = function () {
+    var date = new Date($scope.answerDate);
+    console.log(date);
+    
     $http.post('/api/action', {
       match: $scope.matchKey,
       type: 'answer',
-      time: new Date(),
+      time: date,
       data: {
         teamKey: $scope.teamKey,
         index: $scope.answerIndex - 1,
@@ -73,7 +76,12 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
   
   $scope.isJollyOf = function (team, index) {
     return team.jolly === index;
-  }
+  };
+  
+  $scope.updateAnswerTime = function() {
+    $scope.answerDate = new Date();
+    $scope.answerDate.setMilliseconds(0);
+  };
   
   var updateRemainingTime = function () {
     var diff = new Date($scope.match.start.toDate().getTime() + $scope.match.options.duration * 60 * 1000 - new Date().getTime());
@@ -101,6 +109,8 @@ angular.module('gridViewApp', []).controller('gridViewController', function ($sc
     $http.get('/api/' + $scope.matchKey + '/' + $scope.teamKey).then(function (res) {
       $scope.team = res.data;
     });
+    
+    $scope.updateAnswerTime();
   }
   
   var source = new EventSource('/api/live');

@@ -339,25 +339,26 @@ header h1, header h2 {
 
 .vstack {
   display: flex;
-  width: 100%;
   height: 100%;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .hstack {
   display: flex;
   width: 100%;
-  height: 100%;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
 
 #sendingpanel {
   position: fixed;
   bottom: 0px;
-  height: 90px;
-  padding: 20px;
+  height: 190px;
+  padding: 10px;
+  padding-bottom: 20px;
   background: #FFCC7A;
   border: 1px solid #FF8800;
 }
