@@ -7,32 +7,32 @@ var gridSupplier = {
   'default': function (match) {
     var time = new Date(); // Now
     var answers = {};
-    
+
     _.each(match.actions, action => {
       action.time = new Date(action.time);
     });
-    
+
     var sortedActions = _.sortBy(match.actions, action => action.time);
-    
+
     for (var i = 0; i < match.answers.length; i++) {
       answers[i] = calcAnswerScoreAt(match, i, time);
     }
-    
+
     var teams = _.mapObject(match.teams, team => ({
       name: team.name,
       score: match.answers.length * 10,
       answers: listArray(match.answers.length, i => 0)
     }));
-        
+
     _.each(sortedActions, function (action) {
       if (action.type === 'answer' && action.time < time) {
         var team = teams[action.data.teamKey];
-        
+
         if (action.data.answer == match.answers[action.data.index]) {
           // Correct
           var scoreData = calcAnswerScoreAt(match, i, new Date(action.time - 100));
           var score = scoreData.score + answerBonus[scoreData.correctCount];
-          
+
           team.score += score;
           team.answers[action.data.index] = score;
         }
@@ -43,7 +43,7 @@ var gridSupplier = {
         }
       }
     });
-        
+
     return {
       answers: answers,
       teams: teams
@@ -56,31 +56,31 @@ var gridSupplier = {
     var minutesFromStart = minuteDifference(match.start.toDate(), new Date());
     var limit100th = match.options.answerIncreaseStopTime.toDate();
     // console.log(minutesFromStart);
-    
+
     var answerCount = match.answers.length;
-    
+
     var answers = listArray(answerCount, i => ({
       score: 20,
       correctCount: 0,
       braveTeams: []
     }));
-    
+
     var teams = _.mapObject(match.teams, team => ({
       name: team.name,
       score: answerCount * 10,
       answers: listArray(answerCount, i => 0),
       jolly: -1
     }));
-    
+
     var deriveStop = listArray(answerCount, i => false);
     var sortedActions = _.sortBy(match.actions, action => action.time.toDate());
-    
+
     for (var m = 1; m <= minutesFromStart; m++) {
       var simTime = new Date(match.start.toDate().getTime() + 1000 * 60 * m);
       var endOfMinuteTime = new Date(simTime.getTime());
       simTime.seconds(0);
       endOfMinuteTime.seconds(59);
-      
+
       if (m === 10) {
         _.each(teams, function (team) {
           if (team.jolly === -1) {
@@ -88,10 +88,13 @@ var gridSupplier = {
           }
         })
       }
-      
+
       // Updates each answer score
       for (var i = 0; i < answerCount; i++) {
-        
+
+        var answerData = answers[i];
+        deriveStop[i] = answerData.correctCount >= match.options.derive;
+
         if (!deriveStop[i] && m <= 100) {
           answers[i].score += 1;
           _.each(answers[i].braveTeams, function (teamKey) {
@@ -99,61 +102,65 @@ var gridSupplier = {
             if (teams[teamKey].jolly == i) {
               jollyFactor = 2;
             }
-            
+
             teams[teamKey].score += 1 * jollyFactor;
             teams[teamKey].answers[i] += 1 * jollyFactor;
           })
         }
       }
-      
+
       if (sortedActions.length > 0) {
-        
+
         var currentAction = _.first(sortedActions);
-        
+
         while (currentAction != undefined && currentAction.time.toDate() < endOfMinuteTime) {
           sortedActions = _.tail(sortedActions);
           // console.log(currentAction);
-          
+
           if (currentAction.type === 'jolly') {
             teams[currentAction.data.teamKey].jolly = currentAction.data.index;
           }
-          
+
           if (currentAction.type === 'answer') {
             var actionData = currentAction.data;
             var answerData = answers[actionData.index];
-            
+
             var jollyFactor = 1;
             if (teams[actionData.teamKey].jolly == actionData.index) {
               jollyFactor = 2;
             }
-            
+
             if (actionData.answer == match.answers[actionData.index]) {
               if (!_.contains(answerData.braveTeams, actionData.teamKey)) {
                 var gainScore = answerData.score + answerBonus[answerData.correctCount]
-                
+
                 teams[actionData.teamKey].score += gainScore * jollyFactor;
                 teams[actionData.teamKey].answers[actionData.index] = gainScore * jollyFactor;
-                answerData.correctAnswer++;
+                answerData.correctCount++;
+
                 answerData.braveTeams.push(actionData.teamKey);
-              }             
+              }
             }
             else {
               teams[actionData.teamKey].score -= 10 * jollyFactor;
               teams[actionData.teamKey].answers[actionData.index] -= 10 * jollyFactor;
               answers[actionData.index].score += 2;
             }
+
+
           }
-          
+
+
           currentAction = _.first(sortedActions);
         }
-        
+
       }
-      
-      
+
+
     }
-    
+
     console.timeEnd('simulation');
-    
+
     return {
       answers: answers,
       teams: teams
@@ -169,13 +176,13 @@ function generateGrid(generatorName, match) {
 function calcAnswerScoreAt(match, index, time) {
   console.log('calcAnswerScoreAt(match, ' + index + ', ' + time +')');
   var correctAnswer = match.answers[index];
-  
+
   var answerAction = _.filter(match.actions, function (action) {
     return action.time <= time && action.type === 'answer' && action.data.index === index;
   });
-  
+
   answerAction = _.sortBy(answerAction, action => action.time)
-    
+
   var score = 20;
   var previousTime = new Date(match.start);
   var correctCount = 0;
@@ -184,7 +191,7 @@ function calcAnswerScoreAt(match, index, time) {
     console.log('action');
     if (correctCount < match.options.derive) {
       var dt = minuteDifference(action.time, match.options.answerIncreaseStopTime.toDate());
-      
+
       if (time < match.options.answerIncreaseStopTime.toDate()) {
         score += minuteDifference(previousTime, action.time);
       }
@@ -194,7 +201,7 @@ function calcAnswerScoreAt(match, index, time) {
     }
     console.log(score);
     previousTime = action.time;
-    
+
     if (action.data.answer == correctAnswer) {
       correctCount++;
     }
@@ -203,19 +210,19 @@ function calcAnswerScoreAt(match, index, time) {
     }
     console.log(score);
   });
-  
+
   var dt = minuteDifference(previousTime, match.options.answerIncreaseStopTime.toDate());
-  
+
   if (time < match.options.answerIncreaseStopTime.toDate()) {
     score += minuteDifference(previousTime, time);
   }
   else if (dt > 0) {
     score += dt;
   }
-  
+
   console.log(score);
   console.log('end');
-  
+
   return {
     score: score,
     correctCount: correctCount
